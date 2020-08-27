@@ -11,15 +11,15 @@ import {BehaviorSubject} from 'rxjs';
 const nacl = window['nacl'];
 
 @Injectable()
-export class NanoBlockService {
+export class FlairrBlockService {
   representativeAccounts = [
-    'nano_1center16ci77qw5w69ww8sy4i4bfmgfhr81ydzpurm91cauj11jn6y3uc5y', // The Nano Center
-    'nano_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs', // NanoCrawler
-    'nano_1thingspmippfngcrtk1ofd3uwftffnu4qu9xkauo9zkiuep6iknzci3jxa6', // NanoThings
-    'nano_3rpixaxmgdws7nk7sx6owp8d8becj9ei5nef6qiwokgycsy9ufytjwgj6eg9', // repnode.org
-    'nano_3chartsi6ja8ay1qq9xg3xegqnbg1qx76nouw6jedyb8wx3r4wu94rxap7hg', // Nano Charts
-    'nano_1ninja7rh37ehfp9utkor5ixmxyg8kme8fnzc4zty145ibch8kf5jwpnzr3r', // My Nano Ninja
-    'nano_1iuz18n4g4wfp9gf7p1s8qkygxw7wx9qfjq6a9aq68uyrdnningdcjontgar', // NanoTicker / Json
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // The Nano Center
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // NanoCrawler
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // NanoThings
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // repnode.org
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // Nano Charts
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // My Nano Ninja
+    "flr_3w6un7n5s5pypmkhden8spwqbdpjrix1nnoby7do7esqz5cnbg6iweuikr7y", // NanoTicker / Json
   ];
 
   zeroHash = '0000000000000000000000000000000000000000000000000000000000000000';
@@ -401,14 +401,14 @@ export class NanoBlockService {
     if (blockData.contents.type !== 'state') {
       throw new Error(`Frontier block wasn't a state block, which shouldn't be possible`);
     }
-    if (this.util.hex.fromUint8(this.util.nano.hashStateBlock(blockData.contents)) !== accountInfo.frontier) {
+    if (this.util.hex.fromUint8(this.util.flr.hashStateBlock(blockData.contents)) !== accountInfo.frontier) {
       throw new Error(`Frontier hash didn't match block data`);
     }
   }
 
   // Sign a state block, and insert the signature into the block.
   signStateBlock(walletAccount, blockData) {
-    const hashBytes = this.util.nano.hashStateBlock(blockData);
+    const hashBytes = this.util.flr.hashStateBlock(blockData);
     const privKey = walletAccount.keyPair.secretKey;
     const signed = nacl.sign.detached(hashBytes, privKey, walletAccount.keyPair.expanded);
     blockData.signature = this.util.hex.fromUint8(signed);

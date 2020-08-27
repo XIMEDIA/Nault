@@ -5,7 +5,7 @@ import {Component, Input, OnChanges, HostBinding} from '@angular/core';
   templateUrl: './nano-account-id.component.html',
   styleUrls: ['./nano-account-id.component.css'],
 })
-export class NanoAccountIdComponent implements OnChanges {
+export class FlairrAccountIdComponent implements OnChanges {
 
   @HostBinding('class.uk-flex') isFlex: boolean;
   @Input() accountID: string;

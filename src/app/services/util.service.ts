@@ -62,13 +62,13 @@ export class UtilService {
     isValidNanoAmount: isValidNanoAmount,
     isValidAmount: isValidAmount,
   };
-  nano = {
-    mnanoToRaw: mnanoToRaw,
-    knanoToRaw: knanoToRaw,
-    nanoToRaw: nanoToRaw,
-    rawToMnano: rawToMnano,
-    rawToKnano: rawToKnano,
-    rawToNano: rawToNano,
+  flr = {
+    mFlrToRaw: mFlrToRaw,
+    kFlrToRaw: kFlrToRaw,
+    flrToRaw: flrToRaw,
+    rawToMflr: rawToMflr,
+    rawToKflr: rawToKflr,
+    rawToFlr: rawToFlr,
     hashStateBlock: hashStateBlock,
     isValidSeed: isValidSeed,
     isValidHash: isValidHash,
@@ -269,7 +269,7 @@ function generateAccountKeyPair(accountSecretKeyBytes, expanded = false) {
   return nacl.sign.keyPair.fromSecretKey(accountSecretKeyBytes, expanded);
 }
 
-function getPublicAccountID(accountPublicKeyBytes, prefix = 'nano') {
+function getPublicAccountID(accountPublicKeyBytes, prefix = 'flr') {
   const accountHex = util.uint8.toHex(accountPublicKeyBytes);
   const keyBytes = util.uint4.toUint8(util.hex.toUint4(accountHex)); // For some reason here we go from u, to hex, to 4, to 8??
   const checksum = util.uint5.toString(util.uint4.toUint5(util.uint8.toUint4(blake.blake2b(keyBytes, null, 5).reverse())));
@@ -287,7 +287,7 @@ function isValidNanoAmount(val: string) {
   // numerics and last character is not a dot and number of dots is 0 or 1
   const isnum = /^-?\d*\.?\d*$/.test(val);
   if (isnum && String(val).slice(-1) !== '.') {
-    if (parseFloat(val) > 0 && nanocurrency.checkAmount(mnanoToRaw(val).toString(10))) {
+    if (parseFloat(val) > 0 && nanocurrency.checkAmount(mFlrToRaw(val).toString(10))) {
       return true;
     } else {
       return false;
@@ -330,26 +330,26 @@ function setPrefix(account, prefix = 'xrb') {
 /**
  * Conversion functions
  */
-const mnano = 1000000000000000000000000000000;
-const knano = 1000000000000000000000000000;
-const nano  = 1000000000000000000000000;
-function mnanoToRaw(value) {
-  return new BigNumber(value).times(mnano);
+const mFlr = 1000000000000000000000000000000;
+const kFlr = 1000000000000000000000000000;
+const flr  = 1000000000000000000000000;
+function mFlrToRaw(value) {
+  return new BigNumber(value).times(mFlr);
 }
-function knanoToRaw(value) {
-  return new BigNumber(value).times(knano);
+function kFlrToRaw(value) {
+  return new BigNumber(value).times(kFlr);
 }
-function nanoToRaw(value) {
-  return new BigNumber(value).times(nano);
+function flrToRaw(value) {
+  return new BigNumber(value).times(flr);
 }
-function rawToMnano(value) {
-  return new BigNumber(value).div(mnano);
+function rawToMflr(value) {
+  return new BigNumber(value).div(mFlr);
 }
-function rawToKnano(value) {
-  return new BigNumber(value).div(knano);
+function rawToKflr(value) {
+  return new BigNumber(value).div(kFlr);
 }
-function rawToNano(value) {
-  return new BigNumber(value).div(nano);
+function rawToFlr(value) {
+  return new BigNumber(value).div(flr);
 }
 
 /**
@@ -485,12 +485,12 @@ const util = {
     isValidAmount: isValidNanoAmount,
   },
   nano: {
-    mnanoToRaw: mnanoToRaw,
-    knanoToRaw: knanoToRaw,
-    nanoToRaw: nanoToRaw,
-    rawToMnano: rawToMnano,
-    rawToKnano: rawToKnano,
-    rawToNano: rawToNano,
+    mFlrToRaw: mFlrToRaw,
+    kFlrToRaw: kFlrToRaw,
+    flrToRaw: flrToRaw,
+    rawToMflr: rawToMflr,
+    rawToKflr: rawToKflr,
+    rawToFlr: rawToFlr,
     hashStateBlock: hashStateBlock,
     isValidSeed: isValidSeed,
     isValidHash: isValidHash,

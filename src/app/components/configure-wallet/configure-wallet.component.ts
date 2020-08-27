@@ -37,10 +37,10 @@ export class ConfigureWalletComponent implements OnInit {
 
   selectedImportOption = 'seed';
   importOptions = [
-    { name: 'Nano Seed', value: 'seed' },
-    { name: 'Nano Mnemonic Phrase', value: 'mnemonic' },
-    { name: 'Nault Wallet File', value: 'file' },
-    { name: 'Ledger Nano S / Nano X', value: 'ledger' },
+    { name: 'Flairr Seed', value: 'seed' },
+    { name: 'Flairr Mnemonic Phrase', value: 'mnemonic' },
+    { name: 'FlairrVault Wallet File', value: 'file' },
+    { name: 'Ledger Flairr S', value: 'ledger' },
     { name: 'Private Key', value: 'privateKey' },
     { name: 'Expanded Private Key', value: 'expandedKey' },
   ];
@@ -113,8 +113,7 @@ export class ConfigureWalletComponent implements OnInit {
     }
 
     if (this.ledger.status === LedgerStatus.LOCKED) {
-      return this.notifications.sendWarning(`Unlock your ledger device and open the Nano app to continue`);
-    }
+      return this.notifications.sendWarning(`Unlock your ledger device and open the FlairrVault app to continue`);    }
 
     if (refreshOnly) {
       return;

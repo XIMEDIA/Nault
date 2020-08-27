@@ -11,7 +11,7 @@ export class ApiService {
 
   private async request(action, data, skipError= false): Promise<any> {
     data.action = action;
-    const apiUrl = this.appSettings.settings.serverAPI;
+    const apiUrl = 'http://localhost:4000/api';
     if (!apiUrl) {
       this.node.setOffline(null); // offline mode
       return;

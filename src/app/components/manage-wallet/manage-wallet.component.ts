@@ -152,8 +152,7 @@ export class ManageWalletComponent implements OnInit {
       try {
         const importData = JSON.parse(fileData);
         if (!importData.length || !importData[0].account) {
-          return this.notifications.sendError(`Bad import data, make sure you selected a Nault Address Book export`);
-        }
+          return this.notifications.sendError(`Bad import data, make sure you selected a FlairrVault Address Book export`)        }
 
         const walletEncrypted = btoa(JSON.stringify(importData));
         this.router.navigate(['import-address-book'], { fragment: walletEncrypted });

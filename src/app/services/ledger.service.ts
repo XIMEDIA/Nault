@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Nano from 'hw-app-nano';
+import Flairr from 'hw-app-nano';
 import TransportU2F from '@ledgerhq/hw-transport-u2f';
 import {Subject} from 'rxjs';
 import {ApiService} from './api.service';
@@ -264,13 +264,13 @@ export class LedgerService {
       // Load nano object
       if (!this.ledger.nano) {
         try {
-          this.ledger.nano = new Nano(this.ledger.transport);
+          this.ledger.nano = new Flairr(this.ledger.transport);
         } catch (err) {
-          console.log(`Nano error: `, err);
+          console.log(`Flairrcoin error: `, err);
           if (err.statusText === 'UNKNOWN_ERROR') {
             this.resetLedger();
           }
-          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Error loading Nano USB transport` });
+          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Error loading Flairrcoin USB transport` });
           return resolve(false);
         }
       }
@@ -285,9 +285,9 @@ export class LedgerService {
         if (resolved) return;
         console.log(`Timeout expired, sending not connected`);
         this.ledger.status = LedgerStatus.NOT_CONNECTED;
-        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Unable to detect Nano Ledger application (Timeout)` });
+        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Unable to detect Flairrcoin Ledger application (Timeout)` });
         if (!hideNotifications) {
-          this.notifications.sendWarning(`Unable to connect to the Ledger device.  Make sure it is unlocked and the Nano application is open`);
+          this.notifications.sendWarning(`Unable to connect to the Ledger device.  Make sure it is unlocked and the Flairrcoin application is open`);
         }
         resolved = true;
         return resolve(false);
@@ -301,7 +301,7 @@ export class LedgerService {
         if (!ledgerConfig) return resolve(false);
         if (ledgerConfig && ledgerConfig.version) {
           this.ledger.status = LedgerStatus.LOCKED;
-          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Nano app detected, but ledger is locked` });
+          this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Flairrcoin app detected, but ledger is locked` });
         }
       } catch (err) {
         console.log(`App config error: `, err);
@@ -309,7 +309,7 @@ export class LedgerService {
           this.resetLedger();
         }
         if (!hideNotifications && !resolved) {
-          this.notifications.sendWarning(`Ledger device locked.  Unlock and open the Nano application`);
+          this.notifications.sendWarning(`Ledger device locked.  Unlock and open the Flairrcoin application`);
         }
         return resolve(false);
       }

@@ -6,7 +6,7 @@ import {ApiService} from '../../services/api.service';
 import {UtilService, TxType} from '../../services/util.service';
 import {WorkPoolService} from '../../services/work-pool.service';
 import {AppSettingsService} from '../../services/app-settings.service';
-import {NanoBlockService} from '../../services/nano-block.service';
+import {FlairrBlockService} from '../../services/nano-block.service';
 import * as nanocurrency from 'nanocurrency';
 import { wallet } from 'nanocurrency-web';
 import * as bip39 from 'bip39';
@@ -66,7 +66,7 @@ export class SweeperComponent implements OnInit {
     private api: ApiService,
     private workPool: WorkPoolService,
     public settings: AppSettingsService,
-    private nanoBlock: NanoBlockService,
+    private flairrBlock: FlairrBlockService,
     private util: UtilService,
     private route: Router) {
       if (this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.seed) {
@@ -268,7 +268,7 @@ export class SweeperComponent implements OnInit {
         const blockInfo = await this.api.blockInfo(data.hash);
         let nanoAmountSent = null;
         if (blockInfo.amount) {
-          nanoAmountSent = this.util.nano.rawToMnano(blockInfo.amount);
+          nanoAmountSent = this.util.flr.rawToMflr(blockInfo.amount);
           this.totalSwept = this.util.big.add(this.totalSwept, nanoAmountSent);
         }
         this.notificationService.sendInfo('Account ' + address + ' was swept and ' +
@@ -356,7 +356,7 @@ export class SweeperComponent implements OnInit {
     // check for pending first
     let data = null;
     if (this.appSettings.settings.minimumReceive) {
-      const minAmount = this.util.nano.mnanoToRaw(this.appSettings.settings.minimumReceive).toString(10);
+      const minAmount = this.util.flr.mFlrToRaw(this.appSettings.settings.minimumReceive).toString(10);
       if (this.appSettings.settings.pendingOption === 'amount') {
         data = await this.api.pendingLimitSorted(address, this.maxIncoming, minAmount);
       } else {
@@ -378,7 +378,7 @@ export class SweeperComponent implements OnInit {
       Object.keys(data.blocks).forEach(function(key) {
         raw = this.util.big.add(raw, data.blocks[key].amount);
       }.bind(this));
-      const nanoAmount = this.util.nano.rawToMnano(raw);
+      const nanoAmount = this.util.flr.rawToMflr(raw);
       const pending = {count: Object.keys(data.blocks).length, raw: raw, NANO: nanoAmount, blocks: data.blocks};
       const row = 'Found ' + pending.count + ' pending containing total ' + pending.NANO + ' NANO';
       this.appendLog(row);
@@ -416,7 +416,7 @@ export class SweeperComponent implements OnInit {
     let balance = 0; // balance will be 0 if open block
     this.adjustedBalance = balance.toString();
     let previous = null; // previous is null if we create open block
-    this.representative = this.settings.settings.defaultRepresentative || this.nanoBlock.getRandomRepresentative();
+    this.representative = this.settings.settings.defaultRepresentative || this.flairrBlock.getRandomRepresentative();
     let subType = 'open';
 
     // retrive from RPC

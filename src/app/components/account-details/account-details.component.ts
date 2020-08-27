@@ -4,7 +4,7 @@ import {AddressBookService} from '../../services/address-book.service';
 import {ApiService} from '../../services/api.service';
 import {NotificationService} from '../../services/notification.service';
 import {WalletService} from '../../services/wallet.service';
-import {NanoBlockService} from '../../services/nano-block.service';
+import {FlairrBlockService} from '../../services/nano-block.service';
 import {AppSettingsService} from '../../services/app-settings.service';
 import {PriceService} from '../../services/price.service';
 import {UtilService} from '../../services/util.service';
@@ -22,7 +22,7 @@ import { QrModalService } from '../../services/qr-modal.service';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit, OnDestroy {
-  nano = 1000000000000000000000000;
+  flairr = 1000000000000000000000000;
   zeroHash = '0000000000000000000000000000000000000000000000000000000000000000';
 
   accountHistory: any[] = [];
@@ -96,7 +96,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     private wallet: WalletService,
     private util: UtilService,
     public settings: AppSettingsService,
-    private nanoBlock: NanoBlockService,
+    private flairrBlock: FlairrBlockService,
     private qrModalService: QrModalService,
     private ninja: NinjaService) {
       // to detect when the account changes if the view is already active
@@ -119,9 +119,8 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
       }
     });
     this.priceSub = this.price.lastPrice$.subscribe(event => {
-      this.account.balanceFiat = this.util.nano.rawToMnano(this.account.balance || 0).times(this.price.price.lastPrice).toNumber();
-      this.account.pendingFiat = this.util.nano.rawToMnano(this.account.pending || 0).times(this.price.price.lastPrice).toNumber();
-    });
+      this.account.balanceFiat = this.util.flr.rawToMflr(this.account.balance || 0).times(this.price.price.lastPrice).toNumber();
+      this.account.pendingFiat = this.util.flr.rawToMflr(this.account.pending || 0).times(this.price.price.lastPrice).toNumber();    });
 
     await this.loadAccountDetails();
     this.addressBook.loadAddressBook();
@@ -187,8 +186,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
       // Take minimum receive into account
       let pending;
       if (this.settings.settings.minimumReceive) {
-        const minAmount = this.util.nano.mnanoToRaw(this.settings.settings.minimumReceive);
-        pending = await this.api.pendingLimit(this.accountID, 50, minAmount.toString(10));
+        const minAmount = this.util.flr.mFlrToRaw(this.settings.settings.minimumReceive);        pending = await this.api.pendingLimit(this.accountID, 50, minAmount.toString(10));
         this.account.pending = '0';
       } else {
         pending = await this.api.pending(this.accountID, 50);
@@ -223,11 +221,10 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Set fiat values?
-    this.account.balanceRaw = new BigNumber(this.account.balance || 0).mod(this.nano);
-    this.account.pendingRaw = new BigNumber(this.account.pending || 0).mod(this.nano);
-    this.account.balanceFiat = this.util.nano.rawToMnano(this.account.balance || 0).times(this.price.price.lastPrice).toNumber();
-    this.account.pendingFiat = this.util.nano.rawToMnano(this.account.pending || 0).times(this.price.price.lastPrice).toNumber();
-    await this.getAccountHistory(this.accountID);
+    this.account.balanceRaw = new BigNumber(this.account.balance || 0).mod(this.flairr);
+    this.account.pendingRaw = new BigNumber(this.account.pending || 0).mod(this.flairr);
+    this.account.balanceFiat = this.util.flr.rawToMflr(this.account.balance || 0).times(this.price.price.lastPrice).toNumber();
+    this.account.pendingFiat = this.util.flr.rawToMflr(this.account.pending || 0).times(this.price.price.lastPrice).toNumber();    await this.getAccountHistory(this.accountID);
 
 
     const qrCode = await QRCode.toDataURL(`${this.accountID}`);
@@ -307,8 +304,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     if (!valid) return this.notifications.sendWarning(`Account ID is not a valid account`);
 
     try {
-      const changed = await this.nanoBlock.generateChange(this.walletAccount, repAccount, this.wallet.isLedgerWallet());
-      if (!changed) {
+      const changed = await this.flairrBlock.generateChange(this.walletAccount, repAccount, this.wallet.isLedgerWallet());      if (!changed) {
         this.notifications.sendError(`Error changing representative, please try again`);
         return;
       }
@@ -415,7 +411,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const precision = this.settings.settings.displayCurrency === 'BTC' ? 1000000 : 100;
 
     // Determine fiat value of the amount
-    const fiatAmount = this.util.nano.rawToMnano(rawAmount)
+    const fiatAmount = this.util.flr.rawToMflr(rawAmount)
     .times(this.price.price.lastPrice)
     .times(precision)
     .floor().div(precision).toNumber();
@@ -426,9 +422,9 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   // An update to the fiat amount, sync the nano value based on currently selected denomination
   syncNanoPrice() {
     const fiatAmount = this.amountFiat || 0;
-    const rawAmount = this.util.nano.mnanoToRaw(new BigNumber(fiatAmount).div(this.price.price.lastPrice));
-    const nanoVal = this.util.nano.rawToNano(rawAmount).floor();
-    const nanoAmount = this.getAmountValueFromBase(this.util.nano.nanoToRaw(nanoVal));
+    const rawAmount = this.util.flr.mFlrToRaw(new BigNumber(fiatAmount).div(this.price.price.lastPrice));
+    const nanoVal = this.util.flr.rawToFlr(rawAmount).floor();
+    const nanoAmount = this.getAmountValueFromBase(this.util.flr.flrToRaw(nanoVal));
 
     this.amount = nanoAmount.toNumber();
   }
@@ -477,9 +473,9 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   }
 
   setMaxAmount() {
-    this.amountRaw = this.account.balance ? new BigNumber(this.account.balance).mod(this.nano) : new BigNumber(0);
-    const nanoVal = this.util.nano.rawToNano(this.account.balance).floor();
-    const maxAmount = this.getAmountValueFromBase(this.util.nano.nanoToRaw(nanoVal));
+    this.amountRaw = this.account.balance ? new BigNumber(this.account.balance).mod(this.flairr) : new BigNumber(0);
+    const nanoVal = this.util.flr.rawToFlr(this.account.balance).floor();
+    const maxAmount = this.getAmountValueFromBase(this.util.flr.flrToRaw(nanoVal));
     this.amount = maxAmount.toNumber();
     this.syncFiatPrice();
   }
@@ -488,18 +484,18 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
 
     switch (this.selectedAmount.value) {
       default:
-      case 'nano': return this.util.nano.nanoToRaw(value);
-      case 'knano': return this.util.nano.knanoToRaw(value);
-      case 'mnano': return this.util.nano.mnanoToRaw(value);
+      case 'nano': return this.util.flr.flrToRaw(value);
+      case 'knano': return this.util.flr.kFlrToRaw(value);
+      case 'mnano': return this.util.flr.mFlrToRaw(value);
     }
   }
 
   getAmountValueFromBase(value) {
     switch (this.selectedAmount.value) {
       default:
-      case 'nano': return this.util.nano.rawToNano(value);
-      case 'knano': return this.util.nano.rawToKnano(value);
-      case 'mnano': return this.util.nano.rawToMnano(value);
+      case 'nano': return this.util.flr.rawToFlr(value);
+      case 'knano': return this.util.flr.rawToKflr(value);
+      case 'mnano': return this.util.flr.rawToMflr(value);
     }
   }
 
@@ -523,22 +519,22 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const rawAmount = this.getAmountBaseValue(this.amount || 0);
     this.rawAmount = rawAmount.plus(this.amountRaw);
 
-    const nanoAmount = this.rawAmount.div(this.nano);
+    const nanoAmount = this.rawAmount.div(this.flairr);
 
     if (this.amount < 0 || rawAmount.lessThan(0)) return this.notifications.sendWarning(`Amount is invalid`);
     if (nanoAmount.lessThan(1)) return this.notifications.sendWarning(`Transactions for less than 0.000001 Nano will be ignored by the node.`);
     if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notifications.sendError(`From account does not have enough NANO`);
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
-    this.amountRaw = this.rawAmount.mod(this.nano);
+    this.amountRaw = this.rawAmount.mod(this.flairr);
 
     // Determine fiat value of the amount
-    this.amountFiat = this.util.nano.rawToMnano(rawAmount).times(this.price.price.lastPrice).toNumber();
+    this.amountFiat = this.util.flr.rawToMflr(rawAmount).times(this.price.price.lastPrice).toNumber();
 
     const remaining = new BigNumber(from.balance).minus(this.rawAmount);
     const remainingDecimal = remaining.toString(10);
 
-    const defaultRepresentative = this.settings.settings.defaultRepresentative || this.nanoBlock.getRandomRepresentative();
+    const defaultRepresentative = this.settings.settings.defaultRepresentative || this.flairrBlock.getRandomRepresentative();
     const representative = from.representative || defaultRepresentative;
     const blockData = {
       account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
@@ -590,7 +586,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const openEquiv = !toAcct || !toAcct.frontier; // if open block
 
     const previousBlock = toAcct.frontier || this.zeroHash; // set to zeroes if open block
-    const defaultRepresentative = this.settings.settings.defaultRepresentative || this.nanoBlock.getRandomRepresentative();
+    const defaultRepresentative = this.settings.settings.defaultRepresentative || this.flairrBlock.getRandomRepresentative();
     const representative = toAcct.representative || defaultRepresentative;
 
     const srcBlockInfo = await this.api.blocksInfo([pendingHash]);

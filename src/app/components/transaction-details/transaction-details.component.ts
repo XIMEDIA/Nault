@@ -4,6 +4,7 @@ import {ApiService} from '../../services/api.service';
 import {AppSettingsService} from '../../services/app-settings.service';
 import BigNumber from 'bignumber.js';
 import {AddressBookService} from '../../services/address-book.service';
+import {time} from 'console';
 
 @Component({
   selector: 'app-transaction-details',
@@ -11,7 +12,7 @@ import {AddressBookService} from '../../services/address-book.service';
   styleUrls: ['./transaction-details.component.css']
 })
 export class TransactionDetailsComponent implements OnInit {
-  nano = 1000000000000000000000000;
+  flr = 1000000000000000000000000;
 
   routerSub = null;
   transaction: any = {};
@@ -98,8 +99,8 @@ export class TransactionDetailsComponent implements OnInit {
       this.isStateBlock = false;
     }
     if (hashData.amount) {
-      this.amountRaw = new BigNumber(hashData.amount).mod(this.nano);
-    }
+      this.amountRaw = new BigNumber(hashData.amount).mod(this.flr);
+      }
 
     this.transaction = hashData;
 
@@ -131,6 +132,9 @@ export class TransactionDetailsComponent implements OnInit {
     this.fromAddressBook = this.addressBook.getAccountName(fromAccount);
     this.toAddressBook = this.addressBook.getAccountName(toAccount);
 
+  }
+  getDateFromTimestamp(ts){
+    return new Date(ts * 1000);
   }
 
   getBalanceFromHex(balance) {

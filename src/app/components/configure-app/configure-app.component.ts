@@ -41,9 +41,9 @@ export class ConfigureAppComponent implements OnInit {
   wallet = this.walletService.wallet;
 
   denominations = [
-    { name: 'NANO (1 Mnano)', value: 'mnano' },
-    { name: 'knano (0.001 Mnano)', value: 'knano' },
-    { name: 'nano (0.000001 Mnano)', value: 'nano' },
+    { name: 'FLR (1 Mflr)', value: 'mFlr' },
+    { name: 'kFLR (0.001 Mflr)', value: 'kFlairr' },
+    { name: 'flr (0.000001 Mflr)', value: 'flairr' },
   ];
   selectedDenomination = this.denominations[0].value;
 
@@ -106,7 +106,7 @@ export class ConfigureAppComponent implements OnInit {
     { name: 'Best Option Available', value: 'best' },
     { name: 'Client Side - WebGL [Recommended] (Chrome/Firefox)', value: 'clientWebGL' },
     { name: 'Client Side - CPU', value: 'clientCPU' },
-    { name: 'Server - Nault Server', value: 'server' },
+    { name: 'Server - FlairrVault Server', value: 'server' },
   ];
   selectedPoWOption = this.powOptions[0].value;
 
@@ -195,8 +195,8 @@ export class ConfigureAppComponent implements OnInit {
 
     try {
       const quorumData = await this.api.confirmationQuorum();
-      this.peersStakeReq = quorumData ? Number(this.util.nano.rawToMnano(quorumData.peers_stake_required)).toLocaleString('en-US') : null;
-      this.peersStakeTotal = quorumData ? Number(this.util.nano.rawToMnano(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
+      this.peersStakeReq = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_required)).toLocaleString('en-US') : null;
+      this.peersStakeTotal = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
     } catch {console.warn('Failed to get node stats: confirmation quorum'); }
 
     try {
@@ -339,16 +339,14 @@ export class ConfigureAppComponent implements OnInit {
       if (this.serverAPI.startsWith('https://') || this.serverAPI.startsWith('http://')) {
         newSettings.serverAPI = this.serverAPI;
       } else {
-        return this.notifications.sendWarning(`Custom API Server has an invalid address.`);
-      }
+        return this.notifications.sendWarning(`Custom API Server has an invalid address.  Make sure to use the full address ie: https://flairrcoin.com/server/api/node-api`);      }
     }
 
     if (this.serverWS != null && this.serverWS.trim().length > 1) {
       if (this.serverWS.startsWith('wss://') || this.serverWS.startsWith('ws://')) {
         newSettings.serverWS = this.serverWS;
       } else {
-        return this.notifications.sendWarning(`Custom Update Server has an invalid address.`);
-      }
+        return this.notifications.sendWarning(`Custom Update Server has an invalid address.  Make sure to use the full address ie: wss://ws.flairrcoin.com/`);      }
     }
 
     if (this.serverAuth != null && this.serverAuth.trim().length > 1) {

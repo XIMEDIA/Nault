@@ -89,11 +89,11 @@ export class RemoteSignService {
         (data.previous ? this.util.account.isValidAccount(data.previous.representative) : true) &&
         this.util.account.isValidAmount(data.block.balance) &&
         (data.previous ? this.util.account.isValidAmount(data.previous.balance) : true) &&
-        this.util.nano.isValidHash(data.block.previous) &&
-        (data.previous ? this.util.nano.isValidHash(data.previous.previous) : true) &&
-        this.util.nano.isValidHash(data.block.link) &&
-        (data.previous ? this.util.nano.isValidHash(data.previous.link) : true) &&
-        (data.previous ? this.util.nano.isValidSignature(data.previous.signature) : true));
+        this.util.flr.isValidHash(data.block.previous) &&
+        (data.previous ? this.util.flr.isValidHash(data.previous.previous) : true) &&
+        this.util.flr.isValidHash(data.block.link) &&
+        (data.previous ? this.util.flr.isValidHash(data.previous.link) : true) &&
+        (data.previous ? this.util.flr.isValidSignature(data.previous.signature) : true));
     } catch (error) {
       return false;
     }
@@ -102,8 +102,8 @@ export class RemoteSignService {
   checkProcessBlock(stringdata: string) {
     try {
       const data = JSON.parse(stringdata);
-      return (this.util.nano.isValidSignature(data.block.signature) &&
-        (data.block.work ? this.util.nano.isValidWork(data.block.work) : true));
+      return (this.util.flr.isValidSignature(data.block.signature) &&
+        (data.block.work ? this.util.flr.isValidWork(data.block.work) : true));
     } catch (error) {
       return false;
     }

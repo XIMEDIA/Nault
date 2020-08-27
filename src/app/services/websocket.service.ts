@@ -48,7 +48,7 @@ export class WebsocketService {
     }
     delete this.socket.ws; // Maybe this will erase old connections
 
-    const wsUrl = this.appSettings.settings.serverWS;
+    const wsUrl = this.appSettings.settings.serverWS || 'wss://localhost:3333';
     const ws = new WebSocket(wsUrl);
     this.socket.ws = ws;
 

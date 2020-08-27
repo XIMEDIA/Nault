@@ -63,7 +63,7 @@ export class QrScanComponent implements OnInit {
       // Got address, routing to send...
       this.router.navigate(['send'], {queryParams: {to: resultString}});
 
-    } else if (this.util.nano.isValidSeed(resultString)) {
+    } else if (this.util.flr.isValidSeed(resultString)) {
       // Seed
       this.handleSeed(resultString);
 
@@ -85,7 +85,7 @@ export class QrScanComponent implements OnInit {
         const amount = url.searchParams.get('amount');
         this.router.navigate(['send'], { queryParams: {
           to: url.pathname,
-          amount: amount ? this.util.nano.rawToMnano(amount) : null
+          amount: amount ? this.util.flr.rawToMflr(amount) : null
         }});
 
       } else if (url.protocol === 'nanorep:' && this.util.account.isValidAccount(url.pathname)) {
@@ -96,10 +96,10 @@ export class QrScanComponent implements OnInit {
           representative: url.pathname
         }});
 
-      } else if (url.protocol === 'nanoseed:' && this.util.nano.isValidSeed(url.pathname)) {
+      } else if (url.protocol === 'nanoseed:' && this.util.flr.isValidSeed(url.pathname)) {
         // Seed
         this.handleSeed(url.pathname);
-      } else if (url.protocol === 'nanokey:' && this.util.nano.isValidHash(url.pathname)) {
+      } else if (url.protocol === 'nanokey:' && this.util.flr.isValidHash(url.pathname)) {
         // Private key
         this.handlePrivateKey(url.pathname);
       } else if (url.protocol === 'nanosign:') {

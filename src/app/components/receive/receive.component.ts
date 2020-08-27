@@ -6,7 +6,7 @@ import {ApiService} from '../../services/api.service';
 import {UtilService} from '../../services/util.service';
 import {WorkPoolService} from '../../services/work-pool.service';
 import {AppSettingsService} from '../../services/app-settings.service';
-import {NanoBlockService} from '../../services/nano-block.service';
+import {FlairrBlockService} from '../../services/nano-block.service';
 import * as QRCode from 'qrcode';
 import BigNumber from 'bignumber.js';
 
@@ -27,7 +27,7 @@ export class ReceiveComponent implements OnInit {
   qrCodeImage = null;
   qrAccount = '';
   qrAmount: BigNumber = null;
-  minAmount: BigNumber = this.settings.settings.minimumReceive ? this.util.nano.mnanoToRaw(this.settings.settings.minimumReceive) : null;
+  minAmount: BigNumber = this.settings.settings.minimumReceive ? this.util.flr.mFlrToRaw(this.settings.settings.minimumReceive) : null;
   walletAccount: WalletAccount = null;
   selAccountInit = false;
   loadingIncomingTxList = false;
@@ -39,7 +39,7 @@ export class ReceiveComponent implements OnInit {
     private api: ApiService,
     private workPool: WorkPoolService,
     public settings: AppSettingsService,
-    private nanoBlock: NanoBlockService,
+    private flairrBlock: FlairrBlockService,
     private util: UtilService) { }
 
   async ngOnInit() {
@@ -110,7 +110,7 @@ export class ReceiveComponent implements OnInit {
     let qrCode = null;
     if (amount !== '') {
       if (this.util.account.isValidNanoAmount(amount)) {
-        this.qrAmount = this.util.nano.mnanoToRaw(amount);
+        this.qrAmount = this.util.flr.mFlrToRaw(amount);
       }
     }
     if (this.qrAccount.length > 1) {
@@ -132,10 +132,9 @@ export class ReceiveComponent implements OnInit {
     }
     pendingBlock.loading = true;
 
-    const newBlock = await this.nanoBlock.generateReceive(walletAccount, sourceBlock, this.walletService.isLedgerWallet());
-
+    const newBlock = await this.flairrBlock.generateReceive(walletAccount, sourceBlock, this.walletService.isLedgerWallet());
     if (newBlock) {
-      this.notificationService.sendSuccess(`Successfully received Nano!`);
+      this.notificationService.sendSuccess(`Successfully received Flairrcoin!`);
       // clear the list of pending blocks. Updated again with reloadBalances()
       this.walletService.clearPendingBlocks();
     } else {

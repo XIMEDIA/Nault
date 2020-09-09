@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as blake from 'blakejs';
 import {BigNumber} from 'bignumber.js';
-import * as nanocurrency from 'nanocurrency';
+import * as nanocurrency from 'flairrcurrency-toolkit';
 
 const nacl = window['nacl'];
 const STATE_BLOCK_PREAMBLE = '0000000000000000000000000000000000000000000000000000000000000006';
@@ -319,11 +319,11 @@ function getAccountPublicKey(account) {
   return uint4ToHex(key_uint4);
 }
 
-function setPrefix(account, prefix = 'xrb') {
+function setPrefix(account, prefix = 'flr') {
   if (prefix === 'nano') {
-    return account.replace('xrb_', 'nano_');
+    return account.replace('xrb_', 'flr_');
   } else {
-    return account.replace('nano_', 'xrb_');
+    return account.replace('nano_', 'flr_');
   }
 }
 

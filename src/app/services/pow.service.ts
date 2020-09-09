@@ -15,8 +15,8 @@ let workerList = [];
 @Injectable()
 export class PowService {
 
-  webGLAvailable = false;
-  webGLTested = false;
+  webGLAvailable = true;
+  webGLTested = true;
 
   PoWPool = [];
   parallelQueue = false;
@@ -33,8 +33,8 @@ export class PowService {
    * Determine the best PoW Method available for this browser
    */
   determineBestPoWMethod(): PoWSource {
-    // if (this.hasWebGLSupport()) return 'clientWebGL';
-    // if (this.hasWorkerSupport()) return 'clientCPU'; // For now, server is better than a CPU default (For Mobile)
+    if (this.hasWebGLSupport()) return 'clientWebGL';
+    if (this.hasWorkerSupport()) return 'clientCPU'; // For now, server is better than a CPU default (For Mobile)
 
     return 'server';
   }
@@ -251,7 +251,7 @@ export class PowService {
 
     const start = Date.now();
     try {
-      window['FlairrWebglPow'](hash, (work, n) => {
+      window['NanoWebglPow'](hash, (work, n) => {
           console.log(`WebGL Worker: Found work (${work}) for ${hash} after ${(Date.now() - start) / 1000} seconds [${n} iterations]`);
           response.resolve(work);
         },

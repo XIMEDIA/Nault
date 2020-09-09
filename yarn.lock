@@ -4516,6 +4516,24 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
+flairrcurrency-toolkit@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/flairrcurrency-toolkit/-/flairrcurrency-toolkit-1.0.1.tgz#c14ee6e2e5346962145702154f9edff158e53b58"
+  integrity sha512-MJjk4mAlgcEuODOc4yIBSFUsShzEOr2tgbXlUVrbJQlSBrdxFIYUL6l6rxc0ei11kUROx047pOg55rWI+y96hg==
+  dependencies:
+    bignumber.js "^9.0.0"
+    blakejs "^1.1.0"
+    nanocurrency "^2.5.0"
+
+flairrcurrency-web@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/flairrcurrency-web/-/flairrcurrency-web-1.0.0.tgz#202f6b1fb4900519aef61ff770a52f7e4924b917"
+  integrity sha512-Rsjgctu2uBetYrHkd88CYbTfzxns6h5c+N1V8Ys/64JceZC3ra5YOidJiaYzdWaAmHuXCCYfc6r2amZ30Z+jew==
+  dependencies:
+    bignumber.js "9.0.0"
+    blakejs "1.1.0"
+    crypto-js "3.1.9-1"
+
 flatted@^2.0.1, flatted@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
@@ -6650,15 +6668,6 @@ nano-base32@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/nano-base32/-/nano-base32-1.0.1.tgz#ba548c879efcfb90da1c4d9e097db4a46c9255ef"
   integrity sha1-ulSMh578+5DaHE2eCX20pGySVe8=
-
-nanocurrency-web@^1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/nanocurrency-web/-/nanocurrency-web-1.2.2.tgz#5aa015f5729a2cba4387d96f06c19ac9d36a881e"
-  integrity sha512-Ujx+nnhyD1fr2wAubK93b7Nck2K6PrfcmUoMpO9eNOpbNzvfYNx17+4ZteIr+ZM/Rk3tYacEXWfUzHgJ45D3mQ==
-  dependencies:
-    bignumber.js "9.0.0"
-    blakejs "1.1.0"
-    crypto-js "3.1.9-1"
 
 nanocurrency@^2.5.0:
   version "2.5.0"

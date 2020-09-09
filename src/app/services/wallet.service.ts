@@ -236,7 +236,7 @@ export class WalletService {
 
     if (walletJson.accounts) {
       const newAccounts = walletJson.accounts.map(account => {
-        if (account.id.indexOf('flr_') !== -1) {
+        if (account.id.indexOf('nano_') !== -1) {
           account.id = account.id;
         }
         return account;

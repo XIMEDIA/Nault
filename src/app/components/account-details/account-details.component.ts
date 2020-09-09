@@ -12,7 +12,7 @@ import * as QRCode from 'qrcode';
 import BigNumber from 'bignumber.js';
 import {RepresentativeService} from '../../services/representative.service';
 import {BehaviorSubject} from 'rxjs';
-import * as nanocurrency from 'nanocurrency';
+import * as nanocurrency from 'flairrcurrency-toolkit';
 import {NinjaService} from '../../services/ninja.service';
 import { QrModalService } from '../../services/qr-modal.service';
 
@@ -485,6 +485,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     switch (this.selectedAmount.value) {
       default:
       case 'nano': return this.util.flr.flrToRaw(value);
+      case 'flr': return this.util.flr.flrToRaw(value);
       case 'knano': return this.util.flr.kFlrToRaw(value);
       case 'mnano': return this.util.flr.mFlrToRaw(value);
     }
@@ -494,6 +495,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     switch (this.selectedAmount.value) {
       default:
       case 'nano': return this.util.flr.rawToFlr(value);
+      case 'flr': return this.util.flr.rawToFlr(value);
       case 'knano': return this.util.flr.rawToKflr(value);
       case 'mnano': return this.util.flr.rawToMflr(value);
     }
@@ -537,7 +539,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const defaultRepresentative = this.settings.settings.defaultRepresentative || this.flairrBlock.getRandomRepresentative();
     const representative = from.representative || defaultRepresentative;
     const blockData = {
-      account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
+      account: this.accountID.replace('xrb_', 'flr_').toLowerCase(),
       previous: from.frontier,
       representative: representative,
       balance: remainingDecimal,
@@ -558,7 +560,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     if (!('contents' in previousBlockInfo)) return this.notifications.sendError(`Previous block not found`);
     const jsonBlock = JSON.parse(previousBlockInfo.contents);
     const blockDataPrevious = {
-      account: jsonBlock.account.replace('xrb_', 'nano_').toLowerCase(),
+      account: jsonBlock.account.replace('xrb_', 'flr_').toLowerCase(),
       previous: jsonBlock.previous,
       representative: jsonBlock.representative,
       balance: jsonBlock.balance,
@@ -595,7 +597,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const newBalanceDecimal = newBalance.toString(10);
 
     const blockData = {
-      account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
+      account: this.accountID.replace('xrb_', 'flr_').toLowerCase(),
       previous: previousBlock,
       representative: representative,
       balance: newBalanceDecimal,
@@ -619,7 +621,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
       if (!('contents' in previousBlockInfo)) return this.notifications.sendError(`Previous block not found`);
       const jsonBlock = JSON.parse(previousBlockInfo.contents);
       blockDataPrevious = {
-        account: jsonBlock.account.replace('xrb_', 'nano_').toLowerCase(),
+        account: jsonBlock.account.replace('xrb_', 'flr_').toLowerCase(),
         previous: jsonBlock.previous,
         representative: jsonBlock.representative,
         balance: jsonBlock.balance,
@@ -660,7 +662,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const balance = new BigNumber(account.balance);
     const balanceDecimal = balance.toString(10);
     const blockData = {
-      account: this.accountID.replace('xrb_', 'nano_').toLowerCase(),
+      account: this.accountID.replace('xrb_', 'flr_').toLowerCase(),
       previous: account.frontier,
       representative: this.representativeModel,
       balance: balanceDecimal,
@@ -683,7 +685,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     if (!('contents' in previousBlockInfo)) return this.notifications.sendError(`Previous block not found`);
     const jsonBlock = JSON.parse(previousBlockInfo.contents);
     const blockDataPrevious = {
-      account: jsonBlock.account.replace('xrb_', 'nano_').toLowerCase(),
+      account: jsonBlock.account.replace('xrb_', 'flr_').toLowerCase(),
       previous: jsonBlock.previous,
       representative: jsonBlock.representative,
       balance: jsonBlock.balance,

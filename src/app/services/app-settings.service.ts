@@ -6,7 +6,7 @@ export type PoWSource = 'server'|'clientCPU'|'clientWebGL'|'best';
 
 interface AppSettings {
   displayDenomination: string;
-  // displayPrefix: string | null;
+  displayPrefix: string | null;
   walletStore: string;
   displayCurrency: string;
   defaultRepresentative: string | null;
@@ -28,7 +28,7 @@ export class AppSettingsService {
 
   settings: AppSettings = {
     displayDenomination: 'mFlr',
-    // displayPrefix: 'xrb',
+    displayPrefix: 'flr',
     walletStore: 'localStorage',
     displayCurrency: 'USD',
     defaultRepresentative: null,
@@ -56,8 +56,8 @@ export class AppSettingsService {
     {
       name: 'My Nano Ninja',
       value: 'ninja',
-      api: 'https://mynano.ninja/api/node',
-      ws: 'wss://ws.mynano.ninja',
+      api: 'http://localhost:4000/api/node/',
+      ws: 'wss://flairrcoin.com/socket',
       auth: null,
       shouldRandom: true,
     },
@@ -65,7 +65,7 @@ export class AppSettingsService {
       name: 'Nanos.cc',
       value: 'nanos',
       api: 'https://proxy.nanos.cc/proxy',
-      ws: 'wss://socket.nanos.cc',
+      ws: 'wss://flairrcoin.com/socket',
       auth: null,
       shouldRandom: true,
     },
@@ -73,7 +73,7 @@ export class AppSettingsService {
       name: 'VoxPopuli',
       value: 'voxpopuli',
       api: 'https://voxpopuli.network/api',
-      ws: 'wss://voxpopuli.network/websocket',
+      ws: 'wss://flairrcoin.com/socket',
       auth: null,
       shouldRandom: false,
     },
@@ -177,7 +177,7 @@ export class AppSettingsService {
     localStorage.removeItem(this.storeKey);
     this.settings = {
       displayDenomination: 'mFlr',
-      // displayPrefix: 'xrb',
+      displayPrefix: 'flr',
       walletStore: 'localStorage',
       displayCurrency: 'USD',
       defaultRepresentative: null,

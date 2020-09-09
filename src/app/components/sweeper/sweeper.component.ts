@@ -7,8 +7,8 @@ import {UtilService, TxType} from '../../services/util.service';
 import {WorkPoolService} from '../../services/work-pool.service';
 import {AppSettingsService} from '../../services/app-settings.service';
 import {FlairrBlockService} from '../../services/nano-block.service';
-import * as nanocurrency from 'nanocurrency';
-import { wallet } from 'nanocurrency-web';
+import * as nanocurrency from 'flairrcurrency-toolkit';
+import { wallet } from 'flairrcurrency-web';
 import * as bip39 from 'bip39';
 import {Router} from '@angular/router';
 

@@ -35,7 +35,7 @@
                "hw-app-nano",
                "crypto-js",
                "blakejs",
-               "nanocurrency-web",
+               "flairrcurrency-web",
                "bignumber.js",
                "u2f-api",
                "create-hash",

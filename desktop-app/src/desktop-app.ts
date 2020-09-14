@@ -147,20 +147,20 @@ function getApplicationMenu() {
       submenu: [
         {
           label: 'View GitHub',
-          click () { loadExternal('https://github.com/Nault/Nault'); }
+          click () { loadExternal('https://github.com/XIMedia/Nault'); }
         },
         {
           label: 'Submit Issue',
-          click () { loadExternal('https://github.com/Nault/Nault/issues/new'); }
+          click () { loadExternal('https://github.com/XIMedia/Nault/issues/new'); }
         },
         {type: 'separator'},
         {
           type: 'normal',
-          label: `Nault Version: ${autoUpdater.currentVersion}`,
+          label: `FlairrVault Version: ${autoUpdater.currentVersion}`,
         },
         {
           label: 'View Latest Updates',
-          click () { loadExternal('https://github.com/Nault/Nault/releases'); }
+          click () { loadExternal('https://github.com/XIMedia/Nault/releases'); }
         },
         {type: 'separator'},
         {
@@ -175,7 +175,7 @@ function getApplicationMenu() {
 
   if (process.platform === 'darwin') {
     template.unshift({
-      label: 'Nault',
+      label: 'FlairrVault',
       submenu: [
         {role: 'about'},
         {type: 'separator'},

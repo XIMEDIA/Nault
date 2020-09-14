@@ -55,7 +55,7 @@ export class ConfigureAppComponent implements OnInit {
 
   currencies = [
     { name: 'None', value: '' },
-    { name: 'USD - US Dollar', value: 'USD' },
+    // { name: 'USD - US Dollar', value: 'USD' },
     { name: 'BTC - Bitcoin', value: 'BTC' },
     { name: 'AUD - Australian Dollar', value: 'AUD' },
     { name: 'BRL - Brazilian Real', value: 'BRL' },
@@ -252,7 +252,7 @@ export class ConfigureAppComponent implements OnInit {
 
     if (reloadFiat) {
       // Reload prices with our currency, then call to reload fiat balances.
-      await this.price.getPrice(newCurrency);
+      // await this.price.getPrice(newCurrency);
       this.appSettings.setAppSetting('displayCurrency', newCurrency);
       this.walletService.reloadFiatBalances();
     }

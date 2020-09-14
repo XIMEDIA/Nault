@@ -514,7 +514,7 @@ export class SignComponent implements OnInit {
       }
     }
 
-    // nano seed
+    // flairr seed
     if (keyType === 'nano_seed' || seed !== '' || keyType === 'bip39_seed') {
       if (seed === '') { // seed from input, no mnemonic
         seed = input;
@@ -525,7 +525,7 @@ export class SignComponent implements OnInit {
       }
       // also check using bip39/44 derivation
       let bip39Seed;
-      // take 128 char bip39 seed directly from input or convert it from a 64 char nano seed (entropy)
+      // take 128 char bip39 seed directly from input or convert it from a 64 char flairr seed (entropy)
       if (keyType === 'bip39_seed') {
         bip39Seed = input;
       } else {
@@ -556,7 +556,7 @@ export class SignComponent implements OnInit {
 
   // Validate type of master key
   checkMasterKey(key) {
-    // validate nano seed
+    // validate flairr seed
     if (key.length === 64) {
       if (this.util.flr.isValidSeed(key)) {
         return 'nano_seed';

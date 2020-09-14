@@ -17,26 +17,26 @@ export class PriceService {
     this.loadSavedPrice();
   }
 
-  async getPrice(currency = 'USD') {
-    if (!currency) return; // No currency defined, do not refetch
-    const response: any = await this.http.get(`${this.apiUrl}`).toPromise();
-    if (!response) {
-      return this.price.lastPrice;
-    }
+  // async getPrice(currency = 'USD') {
+  //   if (!currency) return; // No currency defined, do not refetch
+  //   const response: any = await this.http.get(`${this.apiUrl}`).toPromise();
+  //   if (!response) {
+  //     return this.price.lastPrice;
+  //   }
 
-    const quote = response.market_data.current_price;
-    const currencyPrice = quote[currency.toLowerCase()];
-    const btcPrice = quote.btc;
+  //   const quote = response.market_data.current_price;
+  //   const currencyPrice = quote[currency.toLowerCase()];
+  //   const btcPrice = quote.btc;
 
-    this.price.lastPrice = currencyPrice;
-    this.price.lastPriceBTC = btcPrice;
+  //   this.price.lastPrice = currencyPrice;
+  //   this.price.lastPriceBTC = btcPrice;
 
-    this.savePrice();
+  //   this.savePrice();
 
-    this.lastPrice$.next(currencyPrice);
+  //   this.lastPrice$.next(currencyPrice);
 
-    return this.price.lastPrice;
-  }
+  //   return this.price.lastPrice;
+  // }
 
   loadSavedPrice() {
     const priceData = localStorage.getItem(this.storeKey);

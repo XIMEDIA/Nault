@@ -409,7 +409,7 @@ export class RepresentativeService {
     },
     {
       id: 'flr_1egcd1ep677b3udn57s5f8ddn9yxcsbzipss37cdazn5oauwypwao9h6nznm',
-      name: 'Nano Foundation #2',
+      name: 'FlairrCoin Rep',
       warn: true,
     },
   ];

@@ -157,7 +157,7 @@
 
                     <div class="uk-width-2-5">
                       <div class="uk-inline uk-width-1-1">
-                        <button class="uk-button uk-button-secondary uk-width-1-1" type="button" style="text-transform: none;">NANO</button>
+                        <button class="uk-button uk-button-secondary uk-width-1-1" type="button" style="text-transform: none;">FLAIRR</button>
                       </div>
                     </div>
                   </div>
@@ -237,7 +237,7 @@
           <div class="uk-width-1-1" *ngIf="showServerValues()">
             <div class="uk-form-horizontal">
               <div class="">
-                <label class="uk-form-label uk-text-right">API Server <span uk-icon="icon: info;" uk-tooltip title="This server is used to load, cache, and enhance results from the Nano node"></span></label>
+                <label class="uk-form-label uk-text-right">API Server <span uk-icon="icon: info;" uk-tooltip title="This server is used to load, cache, and enhance results from the Flairr node"></span></label>
                 <div class="uk-form-controls">
 
                   <div class="uk-inline uk-width-1-1" *ngIf="!showServerConfigs()">
@@ -266,7 +266,7 @@
                   <div class="uk-inline uk-width-1-1" *ngIf="showServerConfigs()">
                     <input [(ngModel)]="serverWS" class="uk-input uk-margin-small-bottom" id="form-horizontal-text2" type="text" placeholder="wss://domain.com/path">
                     <span class="uk-text-meta">
-                      This has to be a <a href="https://docs.nano.org/integration-guides/websockets/#configuration" target="_blank" rel="noopener noreferrer">Nano Node Websocket</a> or a WebSocket API compliant with it.<br>
+                      This has to be a <a href="https://docs.nano.org/integration-guides/websockets/#configuration" target="_blank" rel="noopener noreferrer">Flairr Node Websocket</a> or a WebSocket API compliant with it.<br>
                       <i>Note: Since this server only notifies about new transactions, most of the wallet functions fine without it.</i>
                     </span>
                   </div>

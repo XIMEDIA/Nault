@@ -216,7 +216,7 @@ export class SweeperComponent implements OnInit {
 
   // Validate type of master key. Seed and private key can't be differentiated
   checkMasterKey(key) {
-    // validate nano seed or private key
+    // validate flairr seed or private key
     if (key.length === 64) {
       if (nanocurrency.checkSeed(key)) {
         return 'nano_seed';
@@ -272,8 +272,8 @@ export class SweeperComponent implements OnInit {
           this.totalSwept = this.util.big.add(this.totalSwept, nanoAmountSent);
         }
         this.notificationService.sendInfo('Account ' + address + ' was swept and ' +
-        (nanoAmountSent ? (nanoAmountSent.toString(10) + ' Nano') : '') + ' transferred to ' + this.destinationAccount, {length: 15000});
-        this.appendLog('Funds transferred ' + (nanoAmountSent ? ('(' + nanoAmountSent.toString(10) + ' Nano)') : '') + ': ' + data.hash);
+        (nanoAmountSent ? (nanoAmountSent.toString(10) + ' Flairr') : '') + ' transferred to ' + this.destinationAccount, {length: 15000});
+        this.appendLog('Funds transferred ' + (nanoAmountSent ? ('(' + nanoAmountSent.toString(10) + ' Flairr)') : '') + ': ' + data.hash);
         console.log(this.adjustedBalance + ' raw transferred to ' + this.destinationAccount);
       } else {
         this.notificationService.sendWarning(`Failed processing block.`);
@@ -378,9 +378,9 @@ export class SweeperComponent implements OnInit {
       Object.keys(data.blocks).forEach(function(key) {
         raw = this.util.big.add(raw, data.blocks[key].amount);
       }.bind(this));
-      const nanoAmount = this.util.flr.rawToMflr(raw);
-      const pending = {count: Object.keys(data.blocks).length, raw: raw, NANO: nanoAmount, blocks: data.blocks};
-      const row = 'Found ' + pending.count + ' pending containing total ' + pending.NANO + ' NANO';
+      const flairrAmount = this.util.flr.rawToMflr(raw);
+      const pending = {count: Object.keys(data.blocks).length, raw: raw, FLR: flairrAmount, blocks: data.blocks};
+      const row = 'Found ' + pending.count + ' pending containing total ' + pending.FLR + ' FLAIRR';
       this.appendLog(row);
 
       // create receive blocks for all pending
@@ -469,8 +469,8 @@ export class SweeperComponent implements OnInit {
       } else {
         // all private keys have been processed
         this.appendLog('Finished processing all accounts');
-        this.appendLog(this.totalSwept + ' Nano transferred');
-        this.notificationService.sendInfo('Finished processing all accounts. ' + this.totalSwept + ' Nano transferred', {length: 0});
+        this.appendLog(this.totalSwept + ' Flairr transferred');
+        this.notificationService.sendInfo('Finished processing all accounts. ' + this.totalSwept + ' Flairr transferred', {length: 0});
         this.sweeping = false;
       }
     }.bind(this));
@@ -496,7 +496,7 @@ export class SweeperComponent implements OnInit {
         }
       }
 
-      // nano seed or private key
+      // flairr seed or private key
       if (keyType === 'nano_seed' || seed !== '' || keyType === 'bip39_seed') {
         // check if a private key first (no index)
         this.appendLog('Checking if input is a private key');
@@ -514,7 +514,7 @@ export class SweeperComponent implements OnInit {
             }
           }
           // also check all indexes using bip39/44 derivation
-          // take 128 char bip39 seed directly from input or convert it from a 64 char nano seed (entropy)
+          // take 128 char bip39 seed directly from input or convert it from a 64 char flairr seed (entropy)
           if (keyType === 'bip39_seed') {
             bip39Seed = this.sourceWallet;
           } else if (seed.length === 64) {

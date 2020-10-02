@@ -11,7 +11,7 @@ export class ApiService {
 
   private async request(action, data, skipError= false): Promise<any> {
     data.action = action;
-    const apiUrl = 'http://localhost:4000/api/node/';
+    const apiUrl = this.appSettings.settings.serverAPI ||'http://localhost:4000/api/node/';
     if (!apiUrl) {
       this.node.setOffline(null); // offline mode
       return;
@@ -57,10 +57,10 @@ export class ApiService {
     return await this.request('accounts_frontiers', { accounts });
   }
   async accountsPending(accounts: string[], count: number = 50): Promise<{blocks: any }> {
-    return await this.request('accounts_pending', { accounts, count, source: true, include_only_confirmed: true });
+    return await this.request('accounts_pending', { accounts, count, source: true, include_only_confirmed: true, include_active: true });
   }
   async accountsPendingLimit(accounts: string[], threshold: string, count: number = 50): Promise<{blocks: any }> {
-    return await this.request('accounts_pending', { accounts, count, threshold, source: true, include_only_confirmed: true });
+    return await this.request('accounts_pending', { accounts, count, threshold, source: true, include_only_confirmed: true, include_active: true });
   }
   async delegatorsCount(account: string): Promise<{ count: string }> {
     return await this.request('delegators_count', { account });
@@ -97,10 +97,10 @@ export class ApiService {
     return await this.request('pending', { account, count, threshold, source: true, include_only_confirmed: true });
   }
   async pendingSorted(account, count): Promise<any> {
-    return await this.request('pending', { account, count, source: true, include_only_confirmed: true, sorting: true });
+    return await this.request('pending', { account, count, source: true, include_only_confirmed: true, sorting: true, include_active: true });
   }
   async pendingLimitSorted(account, count, threshold): Promise<any> {
-    return await this.request('pending', { account, count, threshold, source: true, include_only_confirmed: true, sorting: true });
+    return await this.request('pending', { account, count, threshold, source: true, include_only_confirmed: true, sorting: true, include_active: true });
   }
   async version(): Promise<{rpc_version: number, store_version: number, protocol_version: number, node_vendor: string, network: string,
     network_identifier: string, build_info: string }> {

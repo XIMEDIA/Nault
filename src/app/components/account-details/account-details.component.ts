@@ -58,9 +58,9 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   showAddressBook = false;
   addressBookMatch = '';
   amounts = [
-    { name: 'NANO (1 Mnano)', shortName: 'NANO', value: 'mnano' },
-    { name: 'knano (0.001 Mnano)', shortName: 'knano', value: 'knano' },
-    { name: 'nano (0.000001 Mnano)', shortName: 'nano', value: 'nano' },
+    { name: 'Flairr (1 mFLR)', shortName: 'Flairr', value: 'mFLR' },
+    { name: 'kFLR (0.001 mFLR)', shortName: 'kFlR', value: 'kFLR' },
+    { name: 'flairr (0.000001 mFLR)', shortName: 'flairr', value: 'flairr' },
   ];
   selectedAmount = this.amounts[0];
 
@@ -80,7 +80,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   blockHash = null;
   blockHashReceive = null;
   remoteVisible = false;
-  blockTypes: string[] = ['Send Nano', 'Change Representative'];
+  blockTypes: string[] = ['Send Flairr', 'Change Representative'];
   blockTypeSelected: string = this.blockTypes[0];
   representativeList = [];
   // End remote signing
@@ -524,8 +524,8 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const nanoAmount = this.rawAmount.div(this.flairr);
 
     if (this.amount < 0 || rawAmount.lessThan(0)) return this.notifications.sendWarning(`Amount is invalid`);
-    if (nanoAmount.lessThan(1)) return this.notifications.sendWarning(`Transactions for less than 0.000001 Nano will be ignored by the node.`);
-    if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notifications.sendError(`From account does not have enough NANO`);
+    if (nanoAmount.lessThan(1)) return this.notifications.sendWarning(`Transactions for less than 0.000001 Flairr will be ignored by the node.`);
+    if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notifications.sendError(`From account does not have enough Flairr`);
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
     this.amountRaw = this.rawAmount.mod(this.flairr);
@@ -569,7 +569,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     // Nano signing standard
-    this.qrString = 'nanosign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
+    this.qrString = 'flairrsign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlock = qrCode;
   }
@@ -643,7 +643,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Nano signing standard
-    this.qrString = 'nanosign:' + JSON.stringify(qrData);
+    this.qrString = 'flairrsign:' + JSON.stringify(qrData);
 
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlockReceive = qrCode;
@@ -694,7 +694,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     // Nano signing standard
-    this.qrString = 'nanosign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
+    this.qrString = 'flairrsign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlock = qrCode;
   }

@@ -54,7 +54,7 @@ export class AppSettingsService {
       shouldRandom: false,
     },
     {
-      name: 'My Nano Ninja',
+      name: 'My Flairr Ninja',
       value: 'ninja',
       api: 'http://localhost:4000/api/node/',
       ws: 'wss://flairrcoin.com/socket',

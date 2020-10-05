@@ -22,8 +22,10 @@
           <div class="address">{{ wallet.selectedAccount.id }}</div>
         </div>
         <div class="balance-column">
-          <div class="balance primary">{{ wallet.selectedAccount.balance | rai: settings.settings.displayDenomination }}</div>
-          <div class="balance converted">{{ wallet.selectedAccount.balanceFiat | fiat: settings.settings.displayCurrency }}</div>
+          <div class="balance primary">{{ wallet.selectedAccount.balance}}</div>
+          <div class="balance converted">{{ wallet.selectedAccount.balanceFiat}}</div>
+          <!-- <div class="balance primary">{{ wallet.selectedAccount.balance | rai: settings.settings.displayDenomination }}</div>
+          <div class="balance converted">{{ wallet.selectedAccount.balanceFiat | fiat: settings.settings.displayCurrency }}</div> -->
         </div>
       </div>
       <div [class]="[ 'account', (wallet.selectedAccount === null) ? 'active' : 'inactive' ]" (click)="selectAccount(null)"> <!-- active/inactive total balance -->
@@ -33,7 +35,8 @@
         </div>
         <div class="balance-column">
           <div class="balance primary">{{ wallet.balance | rai: settings.settings.displayDenomination }}</div>
-          <div class="balance converted">{{ wallet.balanceFiat | fiat: settings.settings.displayCurrency }}</div>
+          <div class="balance converted">{{ wallet.balanceFiat  }}</div>
+          <!-- <div class="balance converted">{{ wallet.balanceFiat | fiat: settings.settings.displayCurrency }}</div> -->
         </div>
       </div>
       <ng-container *ngFor="let account of wallet.accounts"> <!-- inactive accounts -->
@@ -50,7 +53,8 @@
               </span>
               {{ account.balance | rai: settings.settings.displayDenomination }}
             </div>
-            <div class="balance converted">{{ account.balanceFiat | fiat: settings.settings.displayCurrency }}</div>
+            <div class="balance converted">{{ account.balanceFiat }}</div>
+            <!-- <div class="balance converted">{{ account.balanceFiat | fiat: settings.settings.displayCurrency }}</div> -->
           </div>
         </div>
       </ng-container>
@@ -96,12 +100,14 @@
                           <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balance : wallet.balance) | rai: 'mnano,true' | amountsplit: 1 }}</div>
                         </div>
                       </div>
-                      <div class="balance-container converted" *ngIf="settings.settings.displayCurrency">
-                        <div class="currency-name"><span class="estimate-symbol">~</span>{{ settings.settings.displayCurrency }}</div>
+                      <!-- <div class="balance-container converted" *ngIf="settings.settings.displayCurrency">
+                        <div class="currency-name"><span class="estimate-symbol">~</span>{{ settings.settings.displayCurrency }}</div> -->
                         <div class="amount-container">
-                          <div class="amount-integer">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | fiat: settings.settings.displayCurrency | amountsplit: 0 }}</div>
-                          <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | fiat: settings.settings.displayCurrency | amountsplit: 1 }}</div>
-                        </div>
+                          <div class="amount-integer">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | amountsplit: 0 }}</div>
+                          <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | amountsplit: 1 }}</div>
+                          <!-- <div class="amount-integer">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | fiat: settings.settings.displayCurrency | amountsplit: 0 }}</div> -->
+                          <!-- <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | fiat: settings.settings.displayCurrency | amountsplit: 1 }}</div> -->
+                        <!-- </div> -->
                       </div>
                     </ng-container>
                     <ng-container *ngIf="isConfigured() && (node.status === null)">
@@ -147,15 +153,17 @@
                           <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pending : wallet.pending) | rai: 'mnano,true' | amountsplit: 1 }}</div>
                         </div>
                       </div>
-                      <div class="balance-container converted" *ngIf="settings.settings.displayCurrency">
-                        <div class="currency-name"><span class="estimate-symbol">~</span>{{ settings.settings.displayCurrency }}</div>
+                      <!-- <div class="balance-container converted" *ngIf="settings.settings.displayCurrency">
+                        <div class="currency-name"><span class="estimate-symbol">~</span>{{ settings.settings.displayCurrency }}</div> -->
                         <div class="amount-container">
-                          <div class="amount-integer">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | fiat: settings.settings.displayCurrency | amountsplit: 0 }}</div>
-                          <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | fiat: settings.settings.displayCurrency | amountsplit: 1 }}</div>
+                          <div class="amount-integer">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) |  amountsplit: 0 }}</div>
+                          <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | amountsplit: 1 }}</div>
+                          <!-- <div class="amount-integer">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | fiat: settings.settings.displayCurrency | amountsplit: 0 }}</div>
+                          <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | fiat: settings.settings.displayCurrency | amountsplit: 1 }}</div> -->
                         </div>
                       </div>
                     </div>
-                  </div>
+                  <!-- </div> -->
                 </div>
                 <div class="nav-separator-top"></div>
               </ng-container>

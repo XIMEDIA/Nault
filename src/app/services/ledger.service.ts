@@ -318,7 +318,7 @@ export class LedgerService {
       try {
         const accountDetails = await this.getLedgerAccount(0);
         this.ledger.status = LedgerStatus.READY;
-        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Nano Ledger application connected` });
+        this.ledgerStatus$.next({ status: this.ledger.status, statusText: `Flairr Ledger application connected` });
 
         if (!this.pollingLedger) {
           this.pollingLedger = true;
@@ -328,7 +328,7 @@ export class LedgerService {
         console.log(`Error on account details: `, err);
         if (err.statusCode === STATUS_CODES.SECURITY_STATUS_NOT_SATISFIED) {
           if (!hideNotifications) {
-            this.notifications.sendWarning(`Ledger device locked.  Unlock and open the Nano application`);
+            this.notifications.sendWarning(`Ledger device locked.  Unlock and open the Flairr application`);
           }
         }
       }

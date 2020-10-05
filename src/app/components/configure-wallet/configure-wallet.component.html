@@ -19,8 +19,8 @@
 <div class="uk-card uk-card-default" *ngIf="activePanel === panels.create">
   <div class="uk-card-body">
     <p>
-      When you create a new wallet, a new Nano seed will be generated which can be used to create brand new accounts
-      on the Nano network.  Your Nano seed is the master key to all of your accounts and any money inside of them!
+      When you create a new wallet, a new Flairr seed will be generated which can be used to create brand new accounts
+      on the Flairr network.  Your Flairr seed is the master key to all of your accounts and any money inside of them!
     </p>
     <div class="uk-alert-primary" uk-alert>
       <p>Make sure you back up your seed, write it down, and keep it incredibly safe! All funds inside can be lost without it!</p>
@@ -34,7 +34,7 @@
 <div class="uk-card uk-card-default" *ngIf="activePanel === panels.import">
   <div class="uk-card-body">
     <p>
-      If you already have a Nano wallet, you can import it below.  When you import a wallet, it replaces the previous one in the GUI but none of your existing 
+      If you already have a Flairr wallet, you can import it below.  When you import a wallet, it replaces the previous one in the GUI but none of your existing 
       accounts are affected since the wallet can be restored simply by importing it again. The seed is not stored anywhere besides in your local client so please make sure you have it stored elsewhere.  Use the drop
       down below to select which type of import you want to use.
     </p>
@@ -65,34 +65,34 @@
     <div uk-grid *ngIf="selectedImportOption === 'seed'" class="uk-margin-top">
       <div class="uk-width-1-1">
         <p>
-          Enter your 64 character seed from any Nano wallet to import it below.
+          Enter your 64 character seed from any Flairr wallet to import it below.
         </p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('seed1','hash')" uk-tooltip title="Scan from QR code"></a>
-          <input type="text" class="uk-input" (keyup.enter)="importExistingWallet()" [(ngModel)]="importSeedModel" placeholder="Your Nano Backup Seed">
+          <input type="text" class="uk-input" (keyup.enter)="importExistingWallet()" [(ngModel)]="importSeedModel" placeholder="Your Flairr Backup Seed">
         </div>
       </div>
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'mnemonic'" class="uk-margin-top">
       <div class="uk-width-1-1">
         <p>
-          Enter your wallet mnemonic phrase generated from any Nano wallet to import it below.
+          Enter your wallet mnemonic phrase generated from any Flairr wallet to import it below.
         </p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('mnemo1','mnemonic')" uk-tooltip title="Scan from QR code"></a>
-          <textarea class="uk-textarea" rows="3" (keyup.enter)="importExistingWallet()" [(ngModel)]="importSeedMnemonicModel" placeholder="Your Nano Backup Mnemonic Phrase"></textarea>
+          <textarea class="uk-textarea" rows="3" (keyup.enter)="importExistingWallet()" [(ngModel)]="importSeedMnemonicModel" placeholder="Your Flairr Backup Mnemonic Phrase"></textarea>
         </div>
       </div>
     </div>
     <div uk-grid *ngIf="selectedImportOption === 'ledger'" class="uk-margin-top">
       <div class="uk-width-1-1">
         <p>
-          Make sure you have the Nano app installed, then connect your ledger device via USB. <a href="https://docs.nault.cc/2020/08/04/ledger-guide.html" target="_blank" rel="noopener noreferrer">Ledger/Nault User Guide</a><br>
+          Make sure you have the Flairr app installed, then connect your ledger device via USB. <a href="https://docs.nault.cc/2020/08/04/ledger-guide.html" target="_blank" rel="noopener noreferrer">Ledger/Nault User Guide</a><br>
           <br>
         </p>
         <div *ngIf="ledger.status === ledgerStatus.NOT_CONNECTED" class="uk-alert uk-alert-warning">
           <b>Ledger Device Not Connected</b><br>
-          Connect your ledger device via USB and make sure you have the Nano app installed, then press the button below to retry
+          Connect your ledger device via USB and make sure you have the Flairr app installed, then press the button below to retry
         </div>
         <div *ngIf="ledger.status === ledgerStatus.LOCKED" class="uk-alert uk-alert-warning">
           <b>Ledger Device Locked</b><br>
@@ -107,11 +107,11 @@
     <div uk-grid *ngIf="selectedImportOption === 'privateKey'" class="uk-margin-top">
       <div class="uk-width-1-1">
         <p>
-          Enter your Nano private key below. These are not to be confused with Nano seeds, which are more common, and produce many private keys.
+          Enter your Flairr private key below. These are not to be confused with Flairr seeds, which are more common, and produce many private keys.
         </p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('priv1','hash')" uk-tooltip title="Scan from QR code"></a>
-          <input type="text" class="uk-input" (keyup.enter)="importSingleKeyWallet()" [(ngModel)]="importPrivateKeyModel" placeholder="Your Nano Private Key">
+          <input type="text" class="uk-input" (keyup.enter)="importSingleKeyWallet()" [(ngModel)]="importPrivateKeyModel" placeholder="Your Flairr Private Key">
         </div>
       </div>
     </div>
@@ -122,7 +122,7 @@
         </p>
         <div class="uk-inline uk-width-1-1">
           <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('expanded1','hash')" uk-tooltip title="Scan from QR code"></a>
-          <input type="text" class="uk-input" (keyup.enter)="importSingleKeyWallet()" [(ngModel)]="importExpandedKeyModel" placeholder="Your Nano Expanded Private Key">
+          <input type="text" class="uk-input" (keyup.enter)="importSingleKeyWallet()" [(ngModel)]="importExpandedKeyModel" placeholder="Your Flairr Expanded Private Key">
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@
     <br>
 
     <div uk-grid>
-      <div class="uk-width-1-4">Nano Seed</div>
+      <div class="uk-width-1-4">Flairr Seed</div>
       <div class="uk-width-3-4 uk-text-truncate">
         {{ newWalletSeed }}<br>
         <a title="Copy Seed To Clipboard" ngxClipboard [cbContent]="newWalletSeed" (cbOnSuccess)="copied()" uk-tooltip>Copy seed to clipboard</a>
@@ -169,7 +169,7 @@
 
     <div uk-grid>
       <div class="uk-width-1-4@m">
-        Nano Mnemonic<br>
+        Flairr Mnemonic<br>
       </div>
       <div class="uk-width-3-4@m">
         <pre class="mne-box"><span *ngFor="let line of newWalletMnemonicLines; let l = index" class="mne-cont"><span *ngFor="let word of line; let i = index" class="mne-word"><span class="mne-num">{{ (l * 4) + i + 1 }}</span> {{ word }}</span></span></pre>
@@ -221,7 +221,7 @@
   </div>
   <div class="uk-card-body">
     <p>
-      Your wallet has been created and you are ready to send and receive Nano!<br>
+      Your wallet has been created and you are ready to send and receive Flairr!<br>
       It will lock after a certain amount of inactivity which can be changed in the <a routerLink="/configure-app" routerLinkActive="active">app settings</a>.
     </p>
   </div>

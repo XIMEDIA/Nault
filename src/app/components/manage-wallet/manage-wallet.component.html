@@ -43,7 +43,7 @@
 
     <div class="uk-card uk-card-default uk-margin" *ngIf="!walletService.isLedgerWallet()">
       <div class="uk-card-header">
-        <h3 class="uk-card-title">Export Nault Wallet</h3>
+        <h3 class="uk-card-title">Export FlairrVault Wallet</h3>
       </div>
       <ng-container *ngIf="wallet.locked else walletUnlocked">
         <div class="uk-card-body">
@@ -55,7 +55,7 @@
           <div class="uk-card-body">
             Use this export tool to simplify wallet transfer to other devices.
             <br>
-            Your data will be encrypted with your wallet's password, and then can be imported into Nault on any device!
+            Your data will be encrypted with your wallet's password, and then can be imported into FlairrVault on any device!
             <br><br>
             Note: The export does not contain your address book.<br>
             <div *ngIf="showQRExport" uk-grid>
@@ -73,7 +73,7 @@
               </div>
               <div class="uk-width-1-2@s uk-width-3-4@m">
                 <br>
-                Scan the QR code on any device to import your Nault wallet!<br>
+                Scan the QR code on any device to import your FlairrVault wallet!<br>
                 <br>
                 You can also import your wallet by using the URL below.
                 <br><br>
@@ -99,7 +99,7 @@
 
     <div class="uk-card uk-card-default uk-margin">
       <div class="uk-card-header">
-        <h3 class="uk-card-title">Nault Address Book</h3>
+        <h3 class="uk-card-title">FlairrVault Address Book</h3>
       </div>
       <div class="uk-card-body">
         Use this tool to simplify transferring your address book between devices.  Use the options below to import or export your
@@ -113,7 +113,7 @@
             <img [src]="addressBookQRExportImg" alt="QR code">
           </div>
           <div class="uk-width-1-2@s uk-width-3-4@m">
-            Scan the QR code on any device to import your Nault Address Book!<br>
+            Scan the QR code on any device to import your FlairrVault Address Book!<br>
             <br>
             If you do not have a QR code scanner, you can also import your address book by using the URL below.<br>
             <input type="text" class="uk-input" value="{{ addressBookQRExportUrl }}"><br>

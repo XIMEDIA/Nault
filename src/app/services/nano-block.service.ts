@@ -75,7 +75,7 @@ export class FlairrBlockService {
     }
 
     if (!this.workPool.workExists(toAcct.frontier)) {
-      this.notifications.sendInfo(`Generating Proof of Work...`);
+      this.notifications.sendInfo(`Generating Proof of Work... This may take a minute or two`);
     }
 
     blockData.work = await this.workPool.getWork(toAcct.frontier);
@@ -222,7 +222,7 @@ export class FlairrBlockService {
     }
 
     if (!this.workPool.workExists(fromAccount.frontier)) {
-      this.notifications.sendInfo(`Generating Proof of Work...`);
+      this.notifications.sendInfo(`Generating Proof of Work... This may take a minute or two`);
     }
 
     blockData.work = await this.workPool.getWork(fromAccount.frontier);
@@ -294,7 +294,7 @@ export class FlairrBlockService {
 
     workBlock = openEquiv ? this.util.account.getAccountPublicKey(walletAccount.id) : previousBlock;
     if (!this.workPool.workExists(workBlock)) {
-      this.notifications.sendInfo(`Generating Proof of Work...`);
+      this.notifications.sendInfo(`Generating Proof of Work... This may take a minute or two`);
     }
 
     blockData.work = await this.workPool.getWork(workBlock);
@@ -371,7 +371,7 @@ export class FlairrBlockService {
       // For open blocks which don't have a frontier, use the public key of the account
       const workBlock = openEquiv ? this.util.account.getAccountPublicKey(walletAccount.id) : block.previous;
       if (!this.workPool.workExists(workBlock)) {
-        this.notifications.sendInfo(`Generating Proof of Work...`);
+        this.notifications.sendInfo(`Generating Proof of Work... This may take a minute or two`);
       }
 
       block.work = await this.workPool.getWork(workBlock, multiplier);

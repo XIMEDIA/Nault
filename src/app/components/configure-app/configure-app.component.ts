@@ -244,18 +244,18 @@ export class ConfigureAppComponent implements OnInit {
   }
 
   async updateDisplaySettings() {
-    const newCurrency = this.selectedCurrency;
-    // const updatePrefixes = this.appSettings.settings.displayPrefix !== this.selectedPrefix;
-    const reloadFiat = this.appSettings.settings.displayCurrency !== newCurrency;
-    this.appSettings.setAppSetting('displayDenomination', this.selectedDenomination);
-    this.notifications.sendSuccess(`App display settings successfully updated!`);
+    // const newCurrency = this.selectedCurrency;
+    // // const updatePrefixes = this.appSettings.settings.displayPrefix !== this.selectedPrefix;
+    // const reloadFiat = this.appSettings.settings.displayCurrency !== newCurrency;
+    // this.appSettings.setAppSetting('displayDenomination', this.selectedDenomination);
+    // this.notifications.sendSuccess(`App display settings successfully updated!`);
 
-    if (reloadFiat) {
-      // Reload prices with our currency, then call to reload fiat balances.
-      await this.price.getPrice(newCurrency);
-      this.appSettings.setAppSetting('displayCurrency', newCurrency);
-      this.walletService.reloadFiatBalances();
-    }
+    // if (reloadFiat) {
+    //   // Reload prices with our currency, then call to reload fiat balances.
+    //   await this.price.getPrice(newCurrency);
+    //   this.appSettings.setAppSetting('displayCurrency', newCurrency);
+    //   this.walletService.reloadFiatBalances();
+    // }
 
     // if (updatePrefixes) {
     //   this.appSettings.setAppSetting('displayPrefix', this.selectedPrefix);
@@ -447,7 +447,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearWalletData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all of your wallet data stored in Nault!<br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete all of your wallet data stored in FlairrVault!<br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 
@@ -458,7 +458,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearAllData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete ALL of your data stored in Nault.<br>This includes all of your wallet data, your address book, and your application settings!<br><br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
+      await UIkit.modal.confirm('<p style="text-align: center;">You are about to delete ALL of your data stored in FlairrVault.<br>This includes all of your wallet data, your address book, and your application settings!<br><br><b>Make sure you have your seed and/or mnemonic backed up!!</b><br><br><b>Are you sure?</b></p>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 

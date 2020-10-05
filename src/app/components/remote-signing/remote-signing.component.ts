@@ -42,7 +42,7 @@ export class RemoteSigningComponent implements OnInit {
 
   validateUnsigned(string) {
     let url = null;
-    if (string.startsWith('nanosign:')) {
+    if (string.startsWith('flairrsign:')) {
       url = new URL(string);
     }
     if (url && this.remoteSignService.checkSignBlock(url.pathname)) {
@@ -54,7 +54,7 @@ export class RemoteSigningComponent implements OnInit {
 
   validateSigned(string) {
     let url = null;
-    if (string.startsWith('nanoprocess:')) {
+    if (string.startsWith('flairrprocess:')) {
       url = new URL(string);
     }
     if (url && this.remoteSignService.checkSignBlock(url.pathname) && this.remoteSignService.checkProcessBlock(url.pathname)) {
@@ -75,11 +75,11 @@ export class RemoteSigningComponent implements OnInit {
   navigateBlock(block) {
     let badScheme = false;
 
-    if (block.startsWith('nanosign:') || block.startsWith('nanoprocess:')) {
+    if (block.startsWith('flairrsign:') || block.startsWith('flairrprocess:')) {
       const url = new URL(block);
-      if (url.protocol === 'nanosign:') {
+      if (url.protocol === 'flairrsign:') {
         this.remoteSignService.navigateSignBlock(url);
-      } else if (url.protocol === 'nanoprocess:') {
+      } else if (url.protocol === 'flairrprocess:') {
         this.remoteSignService.navigateProcessBlock(url);
       } else {
         badScheme = true;

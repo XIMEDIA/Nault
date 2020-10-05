@@ -57,7 +57,7 @@ export class QrScanComponent implements OnInit {
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
 
-    const nano_scheme = /^(nano|nanorep|nanoseed|nanokey|nanosign|nanoprocess|https):.+$/g;
+    const nano_scheme = /^(nano|nanorep|nanoseed|nanokey|nanosign|flairrprocess|https):.+$/g;
 
     if (this.util.account.isValidAccount(resultString)) {
       // Got address, routing to send...
@@ -102,10 +102,10 @@ export class QrScanComponent implements OnInit {
       } else if (url.protocol === 'nanokey:' && this.util.flr.isValidHash(url.pathname)) {
         // Private key
         this.handlePrivateKey(url.pathname);
-      } else if (url.protocol === 'nanosign:') {
+      } else if (url.protocol === 'flairrsign:') {
           this.remoteSignService.navigateSignBlock(url);
 
-      } else if (url.protocol === 'nanoprocess:') {
+      } else if (url.protocol === 'flairrprocess:') {
           this.remoteSignService.navigateProcessBlock(url);
       }
 

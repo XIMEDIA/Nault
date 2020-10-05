@@ -6,7 +6,7 @@
       <div class="uk-width-1-2">
         <div class="nav-button" (click)="toggleNav()" style="cursor: pointer;">
           <span uk-icon="icon: menu;"></span>
-          <span class="app-name">Nault</span>
+          <span class="app-name">FlairrVault</span>
         </div>
       </div>
       <div class="uk-width-1-2 " style="text-align: right;">
@@ -24,8 +24,8 @@
         <div class="balance-column">
           <div class="balance primary">{{ wallet.selectedAccount.balance}}</div>
           <div class="balance converted">{{ wallet.selectedAccount.balanceFiat}}</div>
-          <!-- <div class="balance primary">{{ wallet.selectedAccount.balance | rai: settings.settings.displayDenomination }}</div>
-          <div class="balance converted">{{ wallet.selectedAccount.balanceFiat | fiat: settings.settings.displayCurrency }}</div> -->
+          <div class="balance primary">{{ wallet.selectedAccount.balance | rai: settings.settings.displayDenomination }}</div>
+          <div class="balance converted">{{ wallet.selectedAccount.balanceFiat | fiat: settings.settings.displayCurrency }}</div>
         </div>
       </div>
       <div [class]="[ 'account', (wallet.selectedAccount === null) ? 'active' : 'inactive' ]" (click)="selectAccount(null)"> <!-- active/inactive total balance -->
@@ -35,7 +35,8 @@
         </div>
         <div class="balance-column">
           <div class="balance primary">{{ wallet.balance | rai: settings.settings.displayDenomination }}</div>
-          <div class="balance converted">{{ wallet.balanceFiat  }}</div>
+          <!-- <div class="balance primary">{{ wallet.balance  }}</div> -->
+          <!-- <div class="balance converted">{{ wallet.balanceFiat  }}</div> -->
           <!-- <div class="balance converted">{{ wallet.balanceFiat | fiat: settings.settings.displayCurrency }}</div> -->
         </div>
       </div>
@@ -53,7 +54,7 @@
               </span>
               {{ account.balance | rai: settings.settings.displayDenomination }}
             </div>
-            <div class="balance converted">{{ account.balanceFiat }}</div>
+            <!-- <div class="balance converted">{{ account.balanceFiat }}</div> -->
             <!-- <div class="balance converted">{{ account.balanceFiat | fiat: settings.settings.displayCurrency }}</div> -->
           </div>
         </div>
@@ -103,8 +104,8 @@
                       <!-- <div class="balance-container converted" *ngIf="settings.settings.displayCurrency">
                         <div class="currency-name"><span class="estimate-symbol">~</span>{{ settings.settings.displayCurrency }}</div> -->
                         <div class="amount-container">
-                          <div class="amount-integer">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | amountsplit: 0 }}</div>
-                          <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | amountsplit: 1 }}</div>
+                          <!-- <div class="amount-integer">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | amountsplit: 0 }}</div>
+                          <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | amountsplit: 1 }}</div> -->
                           <!-- <div class="amount-integer">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | fiat: settings.settings.displayCurrency | amountsplit: 0 }}</div> -->
                           <!-- <div class="amount-fractional">{{ (wallet.selectedAccount !== null ? wallet.selectedAccount.balanceFiat : wallet.balanceFiat) | fiat: settings.settings.displayCurrency | amountsplit: 1 }}</div> -->
                         <!-- </div> -->
@@ -156,8 +157,8 @@
                       <!-- <div class="balance-container converted" *ngIf="settings.settings.displayCurrency">
                         <div class="currency-name"><span class="estimate-symbol">~</span>{{ settings.settings.displayCurrency }}</div> -->
                         <div class="amount-container">
-                          <div class="amount-integer">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) |  amountsplit: 0 }}</div>
-                          <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | amountsplit: 1 }}</div>
+                          <!-- <div class="amount-integer">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) |  amountsplit: 0 }}</div>
+                          <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | amountsplit: 1 }}</div> -->
                           <!-- <div class="amount-integer">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | fiat: settings.settings.displayCurrency | amountsplit: 0 }}</div>
                           <div class="amount-fractional">{{ (wallet.selectedAccount ? wallet.selectedAccount.pendingFiat : wallet.pendingFiat) | fiat: settings.settings.displayCurrency | amountsplit: 1 }}</div> -->
                         </div>
@@ -234,7 +235,7 @@
 
         <div class="footer uk-margin-remove-top" uk-grid>
           <div class="uk-width-1-1 uk-text-center">
-            <a href="https://github.com/Nault/Nault" uk-icon="icon: github-alt" uk-tooltip title="View our GitHub" class="footer-link" target="_blank" rel="noopener noreferrer"></a>
+            <a href="https://github.com/XIMEDIA/FlairrVault" uk-icon="icon: github-alt" uk-tooltip title="View our GitHub" class="footer-link" target="_blank" rel="noopener noreferrer"></a>
             <a href="https://twitter.com/TheNanoCenter" uk-icon="icon: twitter" uk-tooltip title="Chat with us on Twitter" class="footer-link" target="_blank" rel="noopener noreferrer"></a>
             <a href="https://discord.nanocenter.org" uk-icon="icon: users" uk-tooltip title="Join our community on Discord" class="footer-link" target="_blank" rel="noopener noreferrer"></a>
           </div>

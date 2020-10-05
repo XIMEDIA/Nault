@@ -73,8 +73,7 @@
                     Account Balance
                   </div>
                   <div class="uk-width-1-3 uk-text-right">
-                    {{ !account? 0:(account.balance || 0 ) }}
-                    <!-- {{ !account? 0:(account.balance || 0 | rai: settings.settings.displayDenomination) }} -->
+                    {{ !account? 0:(account.balance || 0 | rai: settings.settings.displayDenomination) }}
                     <span *ngIf="account && account.balanceRaw && account.balanceRaw > 0" style="display: block; font-size: 12px;" class="uk-text-muted">+{{ !account? 0:(account.balanceRaw.toString(10)) }} raw</span>
                   </div>
                   <div class="uk-width-1-3 uk-text-left">
@@ -94,7 +93,7 @@
                     <span *ngIf="account && account.pendingRaw && account.pendingRaw > 0" style="display: block; font-size: 12px;" class="uk-text-muted">+{{ !account? 0:(account.pendingRaw.toString(10)) }} raw</span>
                   </div>
                   <div class="uk-width-1-3 uk-text-left">
-                    {{ !account? 0:(account.pendingFiat ) }}
+                    <!-- {{ !account? 0:(account.pendingFiat ) }} -->
                     <!-- {{ !account? 0:(account.pendingFiat | fiat: settings.settings.displayCurrency) }} -->
                   </div>
                 </div>
@@ -283,8 +282,8 @@
     </div>
     <div class="uk-modal-body modal-qr-body">
       <ol>
-        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the unsigned QR with an offline Nault, or copy the "Unsigned Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 2</a>.</li>
-        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the new signed QR with an online Nault, or copy the "Signed Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 3</a>.</li>
+        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the unsigned QR with an offline FlairrVault, or copy the "Unsigned Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 2</a>.</li>
+        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the new signed QR with an online FlairrVault, or copy the "Signed Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 3</a>.</li>
       </ol>
 
       <div *ngIf="blockHashReceive" class="uk-width-1-1 uk-text-center" style="display: flex; justify-content: center;">
@@ -315,8 +314,8 @@
     <div class="uk-modal-body modal-block-body">
       <ol>
         <li>Generate a Flairrcoin block below. No wallet login needed.</li>
-        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the unsigned QR with an offline Nault, or copy the "Unsigned Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 2</a>.</li>
-        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the new signed QR with an online Nault, or copy the "Signed Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 3</a>.</li>
+        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the unsigned QR with an offline FlairrVault, or copy the "Unsigned Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 2</a>.</li>
+        <li><a routerLink="/qr-scan" routerLinkActive="active" class="uk-modal-close">Scan</a> the new signed QR with an online FlairrVault, or copy the "Signed Block" to <a routerLink="/remote-signing" routerLinkActive="active" class="uk-modal-close">Step 3</a>.</li>
       </ol>
 
       <span><strong>Block Type</strong></span><span uk-icon="icon: info;" uk-tooltip title="The block type to create for remote signing. Receiving can be done from the Recent Transactions below."></span><br>
@@ -393,7 +392,7 @@
           <div class="uk-form-controls">
             <div class="uk-inline uk-width-1-1">
               <a class="uk-form-icon uk-form-icon-flip" uk-icon="icon: camera" (click)="openQR('rep1','account')" uk-tooltip title="Scan from QR code"></a>
-              <input (blur)="validateRepresentative()" (keyup)="searchRepresentatives()" (focus)="searchRepresentatives()" (keyup.enter)="generateChange()" [(ngModel)]="representativeModel" class="uk-input" [ngClass]="{ 'uk-form-success': repStatus === 2, 'uk-form-danger': repStatus === 0 }" id="form-horizontal-text3" type="text" placeholder="nano_abc...123" #repInput>
+              <input (blur)="validateRepresentative()" (keyup)="searchRepresentatives()" (focus)="searchRepresentatives()" (keyup.enter)="generateChange()" [(ngModel)]="representativeModel" class="uk-input" [ngClass]="{ 'uk-form-success': repStatus === 2, 'uk-form-danger': repStatus === 0 }" id="form-horizontal-text3" type="text" placeholder="flr_abc...123" #repInput>
               
               <div *ngIf="(representativeResults$ | async).length" [hidden]="!showRepresentatives" class="uk-animation-slide-down-small uk-width-1-1 uk-card uk-card-default uk-card-body uk-position-absolute" style="z-index: 15000">
                 <ul class="uk-nav uk-nav-default">

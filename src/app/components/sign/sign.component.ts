@@ -357,10 +357,10 @@ export class SignComponent implements OnInit {
         this.clean(this.previousBlock);
       }
       if (this.previousBlock) {
-        this.qrString = 'nanoprocess:{"block":' + JSON.stringify(block) +
+        this.qrString = 'flairrprocess:{"block":' + JSON.stringify(block) +
         ',"previous":' + JSON.stringify(this.previousBlock) + '}';
       } else {
-        this.qrString = 'nanoprocess:{"block":' + JSON.stringify(block) + '}';
+        this.qrString = 'flairrprocess:{"block":' + JSON.stringify(block) + '}';
       }
 
       const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
@@ -382,7 +382,7 @@ export class SignComponent implements OnInit {
     if (this.shouldGenWork) {
       // For open blocks which don't have a frontier, use the public key of the account
       if (!this.workPool.workExists(workBlock)) {
-        this.notificationService.sendInfo(`Generating Proof of Work...`);
+        this.notificationService.sendInfo(`Generating Proof of Work... This may take a minute or two`);
       }
 
       this.currentBlock.work = await this.workPool.getWork(workBlock);

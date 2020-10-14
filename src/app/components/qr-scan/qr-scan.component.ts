@@ -57,7 +57,7 @@ export class QrScanComponent implements OnInit {
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
 
-    const nano_scheme = /^(nano|nanorep|nanoseed|nanokey|nanosign|flairrprocess|https):.+$/g;
+    const nano_scheme = /^(nano|nanorep|nanoseed|nanokey|nanosign|flairrprocess|https|flairrsign|flairrseed|flairrrep|flairrkey):.+$/g;
 
     if (this.util.account.isValidAccount(resultString)) {
       // Got address, routing to send...

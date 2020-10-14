@@ -145,30 +145,30 @@ function getApplicationMenu() {
     {
       role: 'help',
       submenu: [
-        {
-          label: 'View GitHub',
-          click () { loadExternal('https://github.com/Nault/Nault'); }
-        },
-        {
-          label: 'Submit Issue',
-          click () { loadExternal('https://github.com/Nault/Nault/issues/new'); }
-        },
-        {type: 'separator'},
-        {
-          type: 'normal',
-          label: `Nault Version: ${autoUpdater.currentVersion}`,
-        },
-        {
-          label: 'View Latest Updates',
-          click () { loadExternal('https://github.com/Nault/Nault/releases'); }
-        },
-        {type: 'separator'},
-        {
-          label: `Check for Updates...`,
-          click (menuItem, browserWindow) {
-            checkForUpdates();
-          }
-        },
+        // {
+        //   label: 'View GitHub',
+        //   click () { loadExternal('https://github.com/Nault/Nault'); }
+        // },
+        // {
+        //   label: 'Submit Issue',
+        //   click () { loadExternal('https://github.com/Nault/Nault/issues/new'); }
+        // },
+        // {type: 'separator'},
+        // {
+        //   type: 'normal',
+        //   label: `Nault Version: ${autoUpdater.currentVersion}`,
+        // },
+        // {
+        //   label: 'View Latest Updates',
+        //   click () { loadExternal('https://github.com/Nault/Nault/releases'); }
+        // },
+        // {type: 'separator'},
+        // {
+        //   label: `Check for Updates...`,
+        //   click (menuItem, browserWindow) {
+        //     checkForUpdates();
+        //   }
+        // },
       ]
     }
   ];

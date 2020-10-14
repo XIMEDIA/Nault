@@ -380,7 +380,7 @@ export class SweeperComponent implements OnInit {
       }.bind(this));
       const nanoAmount = this.util.flr.rawToMflr(raw);
       const pending = {count: Object.keys(data.blocks).length, raw: raw, NANO: nanoAmount, blocks: data.blocks};
-      const row = 'Found ' + pending.count + ' pending containing total ' + pending.NANO + ' NANO';
+      const row = 'Found ' + pending.count + ' pending containing total ' + pending.NANO + ' FLAIRR';
       this.appendLog(row);
 
       // create receive blocks for all pending

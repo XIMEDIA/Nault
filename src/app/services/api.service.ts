@@ -91,10 +91,10 @@ export class ApiService {
     return await this.request('account_info', { account, pending: true, representative: true, weight: true });
   }
   async pending(account, count): Promise<any> {
-    return await this.request('pending', { account, count, source: true, include_only_confirmed: true });
+    return await this.request('pending', { account, count, source: true, include_only_confirmed: true, include_active: true });
   }
   async pendingLimit(account, count, threshold): Promise<any> {
-    return await this.request('pending', { account, count, threshold, source: true, include_only_confirmed: true });
+    return await this.request('pending', { account, count, threshold, source: true, include_only_confirmed: true, include_active: true });
   }
   async pendingSorted(account, count): Promise<any> {
     return await this.request('pending', { account, count, source: true, include_only_confirmed: true, sorting: true, include_active: true });

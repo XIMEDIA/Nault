@@ -7,7 +7,7 @@
   "main": "desktop-app/dist/desktop-app.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 161.97.101.162 --disable-host-check",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

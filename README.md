@@ -12,7 +12,7 @@ It's a fully client-side signing wallet for sending and receiving [Nano](https:/
 
 Seamless integration with any Nano compatible RPC backend/websocket and the aim to be more frequently maintained are some of the main features. Those together will greatly increase the stability, performance and uptime.
 
-![Nault Screenshot](/src/assets/img/preview.png)
+![Nault Screenshot](/src/assets/img/Preview-2.png)
 ___
 
 ## How To Use

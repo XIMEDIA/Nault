@@ -7,7 +7,7 @@ import { UtilService } from './util.service';
 export class NinjaService {
 
   // URL to Ninja API
-  ninjaUrl = 'http://localhost:4000/api/';
+  ninjaUrl = 'https://flairrcoin.com/ninja/api/';
 
   // null - loading, false - offline, true - online
   status = null;

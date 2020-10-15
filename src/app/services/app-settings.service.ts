@@ -56,7 +56,7 @@ export class AppSettingsService {
     {
       name: 'My Flairr Ninja',
       value: 'ninja',
-      api: 'http://localhost:4000/api/node/',
+      api: 'https://flairrcoin.com/ninja/api/node/',
       ws: 'wss://flairrcoin.com/socket',
       auth: null,
       shouldRandom: true,
@@ -86,9 +86,9 @@ export class AppSettingsService {
     //   shouldRandom: false,
     // },
     {
-      name: 'NanoCrawler',
-      value: 'nanocrawler',
-      api: 'https://vault.nanocrawler.cc/api/node-api',
+      name: 'FlairrCrawler',
+      value: 'flairrcrawler',
+      api: 'https://flairrcoin.com/vault/api/node-api',
       ws: null,
       auth: null,
       shouldRandom: false,

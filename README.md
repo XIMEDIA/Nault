@@ -1,37 +1,22 @@
-# Nault
+# FlairrVault
 
-![GitHub Pages](https://github.com/Nault/Nault/workflows/GitHub%20Pages/badge.svg)
-![Electron App](https://github.com/Nault/Nault/workflows/Electron%20App/badge.svg)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Nault_Nault&metric=alert_status)](https://sonarcloud.io/dashboard?id=Nault_Nault)
-[![GitHub All Releases](https://img.shields.io/github/downloads/nault/nault/total)](https://github.com/Nault/Nault/releases/latest)
-[![Discord](https://img.shields.io/badge/discord-join%20chat-orange.svg)](https://discord.nanocenter.org)
 
-Nault is a community driven fork of the popular Nano wallet [NanoVault](https://github.com/cronoh/nanovault) 💙
+FlairrVault is a fork of the popular Nano wallet [NanoVault](https://github.com/cronoh/nanovault) 💙
 
-It's a fully client-side signing wallet for sending and receiving [Nano](https://github.com/nanocurrency/nano-node/) either directly in your browser at [nault.cc](https://nault.cc) or with the [desktop app](https://github.com/Nault/Nault/releases/latest).
+It's a fully client-side signing wallet for sending and receiving [Flairr](https://github.com/nanocurrency/nano-node/) directly in your browser at [flairrcoin.com/vault](https://flairrcoin.com/vault)
 
-Seamless integration with any Nano compatible RPC backend/websocket and the aim to be more frequently maintained are some of the main features. Those together will greatly increase the stability, performance and uptime.
+Seamless integration with any Flairr compatible RPC backend/websocket and the aim to be more frequently maintained are some of the main features. Those together will greatly increase the stability, performance and uptime.
 
-![Nault Screenshot](/src/assets/img/Preview-2.png)
+![FlairrVault Screenshot](/src/assets/img/Preview-2.png)
 ___
 
 ## How To Use
 
-Nault is available on your desktop (Windows/Mac/Linux) - just head over to the [latest release](https://github.com/Nault/Nault/releases/latest) and download the version for your OS.
-
-You can also use Nault from any device on the web at [nault.cc](https://nault.cc).
-
-Both the desktop (recommended) and web version supports the Ledger Nano hardware wallet. For help using it, please refer to [this guide](https://docs.nault.cc/2020/08/04/ledger-guide.html).
-
-## How To Help
-
-Thanks for your interest in contributing! There are many ways to contribute to this project. [Get started here at CONTRIBUTING.md](CONTRIBUTING.md).
-
-If you want to know how to setup the development environment head over to [DEVELOPMENT.md](DEVELOPMENT.md).
+You can also use FlairrVault from any device on the web at [flairrcoin.com/vault](https://flairrcoin.com/vault).
 
 ## Support
 
-If you are looking for more interactive and quick support compared to creating a new Github issue, you will then find most of the developers in the Nault channel over at the [TNC discord server](https://discord.nanocenter.org/).
+[Contact us!](https://flairrcoin.com/?page_id=42)
 
 ## Acknowledgements
 
@@ -45,7 +30,7 @@ Special thanks to the following!
 
 ## Donations
 
-If you have found Nault useful and are feeling generous, you can donate at
-`nano_3niceeeyiaa86k58zhaeygxfkuzgffjtwju9ep33z9c8qekmr3iuc95jbqc8`
+If you have found FlairrVault useful and are feeling generous, you can donate at
+`our donation addresss here`
 
 Thanks a lot!

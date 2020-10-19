@@ -8,7 +8,7 @@ import {WalletService} from '../services/wallet.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  donationAccount = `flr_318syypnqcgdouy3p3ekckwmnmmyk5z3dpyq48phzndrmmspyqdqjymoo8hj`;
+  donationAccount = `flr_3374j6q4uqhpfkph8wpwa9zfqsnjjygw4t9kzzdeu5rptoues131azngr8wo`;
 
   wallet = this.walletService.wallet;
   isConfigured = this.walletService.isConfigured;

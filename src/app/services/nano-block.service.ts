@@ -13,13 +13,13 @@ const nacl = window['nacl'];
 @Injectable()
 export class FlairrBlockService {
   representativeAccounts = [
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // The Nano Center
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // NanoCrawler
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // NanoThings
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // repnode.org
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // Nano Charts
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // My Nano Ninja
-    "flr_36dzkg8q97bw4x99k8wgchnotbqbdruf74mxqhmutpmczjz7dn3nbng3d5z7", // NanoTicker / Json
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // The Nano Center
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // NanoCrawler
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // NanoThings
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // repnode.org
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // Nano Charts
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // My Nano Ninja
+    "flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6", // NanoTicker / Json
   ];
 
   zeroHash = '0000000000000000000000000000000000000000000000000000000000000000';

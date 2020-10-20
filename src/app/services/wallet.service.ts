@@ -307,8 +307,6 @@ export class WalletService {
       await this.addWalletAccount(i, false);
     }
 
-    console.log('calling reloadBalances');
-    
     await this.reloadBalances(true);
 
     if (this.wallet.accounts.length) {
@@ -702,8 +700,6 @@ export class WalletService {
       return;
     }
     for (const accountID in accounts.balances) {
-      console.log(accountID);
-      
       if (!accounts.balances.hasOwnProperty(accountID)) continue;
       // Find the account, update it
       // const prefixedAccount = this.util.account.setPrefix(accountID, this.appSettings.settings.displayPrefix);
@@ -713,8 +709,6 @@ export class WalletService {
       walletAccount.balance = new BigNumber(accounts.balances[accountID].balance);
       walletAccount.pendingOriginal = new BigNumber(accounts.balances[accountID].pending);
 
-      console.log(' walletAccount.pendingOriginal:',  walletAccount.pendingOriginal );
-      
       walletAccount.balanceRaw = new BigNumber(walletAccount.balance).mod(this.flr);
 
       walletAccount.balanceFiat = this.util.flr.rawToMflr(walletAccount.balance).times(fiatPrice).toNumber();
@@ -728,8 +722,6 @@ export class WalletService {
 
     let hasPending = false;
 
-    console.log(walletPending);
-    
     // Check if there is a pending balance at all
     if (walletPending.gt(0)) {
       // If we have a minimum receive amount, check accounts for actual receivable transactions
@@ -737,8 +729,6 @@ export class WalletService {
         const minAmount = this.util.flr.mFlrToRaw(this.appSettings.settings.minimumReceive);
         const pending = await this.api.accountsPendingLimit(this.wallet.accounts.map(a => a.id), minAmount.toString(10));
 
-        console.log(pending, pending.blocks);
-        
         if (pending && pending.blocks) {
           for (const block in pending.blocks) {
             if (!pending.blocks.hasOwnProperty(block)) {
@@ -773,8 +763,7 @@ export class WalletService {
       } else {
         hasPending = true; // No minimum receive, but pending balance, set true
         walletPendingReal = walletPending;
-        console.log('hasPending');
-        
+
         // update the individual pending here to avoid setting it twice (GUI flickering)
         this.updateAccountPending(accounts);
       }
@@ -808,13 +797,9 @@ export class WalletService {
     if (reloadPending) {
       this.clearPendingBlocks();
     }
-    console.log('800: ', reloadPending, walletPending.gt(0));
-    
 
     // If there is a pending balance, search for the actual pending transactions
-    if (reloadPending) {
-      console.log('calling loadPending');
-      
+    if (reloadPending && walletPending.gt(0)) {
       await this.loadPendingBlocksForWallet();
     }
     this.reloadingBalance = false;
@@ -828,8 +813,6 @@ export class WalletService {
       walletAccount.pending = new BigNumber(accounts.balances[accountID].pending);
       walletAccount.pendingRaw = new BigNumber(walletAccount.pending).mod(this.flr);
       walletAccount.pendingFiat = this.util.flr.rawToMflr(walletAccount.pending).times(this.price.price.lastPrice).toNumber();
-      console.log('829: ', walletAccount);
-      
     }
   }
 

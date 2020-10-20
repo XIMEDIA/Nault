@@ -307,6 +307,8 @@ export class WalletService {
       await this.addWalletAccount(i, false);
     }
 
+    console.log('calling reloadBalances');
+    
     await this.reloadBalances(true);
 
     if (this.wallet.accounts.length) {
@@ -722,6 +724,8 @@ export class WalletService {
 
     let hasPending = false;
 
+    console.log(walletPending);
+    
     // Check if there is a pending balance at all
     if (walletPending.gt(0)) {
       // If we have a minimum receive amount, check accounts for actual receivable transactions
@@ -729,6 +733,8 @@ export class WalletService {
         const minAmount = this.util.flr.mFlrToRaw(this.appSettings.settings.minimumReceive);
         const pending = await this.api.accountsPendingLimit(this.wallet.accounts.map(a => a.id), minAmount.toString(10));
 
+        console.log(pending, pending.blocks);
+        
         if (pending && pending.blocks) {
           for (const block in pending.blocks) {
             if (!pending.blocks.hasOwnProperty(block)) {

@@ -10,6 +10,10 @@ Seamless integration with any Flairr compatible RPC backend/websocket and the ai
 ![FlairrVault Screenshot](/src/assets/img/Preview-2.png)
 ___
 
+## How to get FlairrCoin
+
+When you download Flairr, you will immediately receive 5 FREE mini-flairrs to help you get started. You’ll earn many more by simply playing the game as you search for clues and save the world! At any time, you can choose to transfer your mini-flairrs to your personal FlairrVault account, where they will be kept safe for you 24/7.
+
 ## How To Use
 
 You can also use FlairrVault from any device on the web at [flairrcoin.com/vault](https://flairrcoin.com/vault).

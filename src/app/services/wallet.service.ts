@@ -812,7 +812,7 @@ export class WalletService {
     
 
     // If there is a pending balance, search for the actual pending transactions
-    if (reloadPending && walletPending.gt(0)) {
+    if (reloadPending) {
       console.log('calling loadPending');
       
       await this.loadPendingBlocksForWallet();

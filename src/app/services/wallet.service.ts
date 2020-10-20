@@ -797,9 +797,13 @@ export class WalletService {
     if (reloadPending) {
       this.clearPendingBlocks();
     }
+    console.log('800: ', reloadPending, walletPending.gt(0));
+    
 
     // If there is a pending balance, search for the actual pending transactions
     if (reloadPending && walletPending.gt(0)) {
+      console.log('calling loadPending');
+      
       await this.loadPendingBlocksForWallet();
     }
     this.reloadingBalance = false;

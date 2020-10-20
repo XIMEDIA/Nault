@@ -702,6 +702,8 @@ export class WalletService {
       return;
     }
     for (const accountID in accounts.balances) {
+      console.log(accountID);
+      
       if (!accounts.balances.hasOwnProperty(accountID)) continue;
       // Find the account, update it
       // const prefixedAccount = this.util.account.setPrefix(accountID, this.appSettings.settings.displayPrefix);
@@ -711,6 +713,8 @@ export class WalletService {
       walletAccount.balance = new BigNumber(accounts.balances[accountID].balance);
       walletAccount.pendingOriginal = new BigNumber(accounts.balances[accountID].pending);
 
+      console.log(' walletAccount.pendingOriginal:',  walletAccount.pendingOriginal );
+      
       walletAccount.balanceRaw = new BigNumber(walletAccount.balance).mod(this.flr);
 
       walletAccount.balanceFiat = this.util.flr.rawToMflr(walletAccount.balance).times(fiatPrice).toNumber();
@@ -769,7 +773,8 @@ export class WalletService {
       } else {
         hasPending = true; // No minimum receive, but pending balance, set true
         walletPendingReal = walletPending;
-
+        console.log('hasPending');
+        
         // update the individual pending here to avoid setting it twice (GUI flickering)
         this.updateAccountPending(accounts);
       }
@@ -823,6 +828,8 @@ export class WalletService {
       walletAccount.pending = new BigNumber(accounts.balances[accountID].pending);
       walletAccount.pendingRaw = new BigNumber(walletAccount.pending).mod(this.flr);
       walletAccount.pendingFiat = this.util.flr.rawToMflr(walletAccount.pending).times(this.price.price.lastPrice).toNumber();
+      console.log('829: ', walletAccount);
+      
     }
   }
 

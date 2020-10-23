@@ -113,17 +113,17 @@
 	position: relative;
 	overflow: hidden;
 
-	height: 100px;
-	@media (min-width: 550px) {
-		height: 7vw;
-		min-height: 100px;
+	height: 155px;
+	@media (min-width: 640px) {
+		height: 11vw;
+		min-height: 155px;
 	}
 
 	&.is-wallet {
-		background: #506279;
+		background: #ff4c4c;
 
 		> .logo {
-			filter: saturate(0.5) brightness(0.75);
+			// filter: saturate(0.5) brightness(0.75);
 		}
 
 		&::after {
@@ -132,7 +132,7 @@
 			width: calc(100% - 10px);
 			height: calc(100% - 10px);
 			display: block;
-			border: 1px dashed #ffffff;
+			//border: 1px dashed #ffffff;
 			margin: 4px;
 			border-radius: 10px;
 			pointer-events: none;
@@ -140,7 +140,7 @@
 	}
 
 	&.incoming-card {
-		background: rgba(0, 243, 255, 0.17);
+		background:linear-gradient(0deg, #fca591, #ff4c4c);
 
 		min-height: 125px;
 		height: 125px;
@@ -155,10 +155,10 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(180deg, #2ba6ed, #61bca7)
-		// background-size: 170%;
-		// background-position: 29% 30%;
-		// background-repeat: no-repeat;
+		background: url('../../assets/img/nano-mark.svg');
+		background-size: 101%;
+		background-position: 50% 25%;
+		background-repeat: no-repeat;
 	}
 
 	> .card-contents {

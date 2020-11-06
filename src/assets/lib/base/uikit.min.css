@@ -1588,20 +1588,20 @@ select.uk-form-width-xsmall {
 }
 
 .uk-button-danger {
-  background-color: #f0506e;
+  background-color: #6a7dc9;
   color: #fff;
   border: 1px solid transparent
 }
 
 .uk-button-danger:focus,
 .uk-button-danger:hover {
-  background-color: #ee395b;
+  background-color: #a2b3f7;
   color: #fff
 }
 
 .uk-button-danger.uk-active,
 .uk-button-danger:active {
-  background-color: #ec2147;
+  background-color: #6a7dc9;
   color: #fff
 }
 

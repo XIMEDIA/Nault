@@ -105,7 +105,7 @@ export class ApiService {
   async version(): Promise<{rpc_version: number, store_version: number, protocol_version: number, node_vendor: string, network: string,
     network_identifier: string, build_info: string }> {
     const version = await this.request('version', { }, true);
-    console.log("return version: ", version);
+    console.log("return version: ", version, typeof version);
     
     return version;
   }

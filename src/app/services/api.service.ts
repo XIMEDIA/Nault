@@ -104,10 +104,7 @@ export class ApiService {
   }
   async version(): Promise<{rpc_version: number, store_version: number, protocol_version: number, node_vendor: string, network: string,
     network_identifier: string, build_info: string }> {
-    const version = await this.request('version', { }, true);
-    console.log("return version: ", version, typeof version);
-    
-    return version;
+    return await this.request('version', { }, true);
   }
   async confirmationQuorum(): Promise<{quorum_delta: string, online_weight_quorum_percent: number, online_weight_minimum: string,
     online_stake_total: string, peers_stake_total: string, peers_stake_required: string }> {

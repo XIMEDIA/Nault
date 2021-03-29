@@ -201,6 +201,8 @@ export class ConfigureAppComponent implements OnInit {
 
     try {
       const version = await this.api.version();
+      console.log(version);
+      
       this.nodeVendor = version.node_vendor;
       this.nodeNetwork = version.network;
     } catch {console.warn('Failed to get node stats: version'); }

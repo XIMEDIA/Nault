@@ -195,17 +195,16 @@ export class ConfigureAppComponent implements OnInit {
       this.nodeUncemented = Number(blockCount.count - blockCount.cemented).toLocaleString('en-US');
     } catch {console.warn('Failed to get node stats: block count'); }
 
-    // try {
-    //   const quorumData = await this.api.confirmationQuorum();
-    //   this.peersStakeReq = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_required)).toLocaleString('en-US') : null;
-    //   this.peersStakeTotal = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
-    // } catch {console.warn('Failed to get node stats: confirmation quorum'); }
+    try {
+      const quorumData = await this.api.confirmationQuorum();
+      this.peersStakeReq = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_required)).toLocaleString('en-US') : null;
+      this.peersStakeTotal = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
+    } catch {console.warn('Failed to get node stats: confirmation quorum'); }
 
     try {
       const version = await this.api.version();
-      console.log(version);
-      
-      this.nodeVendor = version.node_vendor;
+      // this.nodeVendor = version.node_vendor;
+      this.nodeVendor = "Flairrcoin 1.0";
       this.nodeNetwork = version.network;
     } catch {console.warn('Failed to get node stats: version'); }
 

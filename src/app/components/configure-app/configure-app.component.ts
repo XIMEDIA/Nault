@@ -177,6 +177,8 @@ export class ConfigureAppComponent implements OnInit {
   }
 
   async updateNodeStats(refresh= false) {
+    console.log('in updateNodeStats');
+    
     if ((!this.serverAPIUpdated ||
       (this.serverAPIUpdated !== this.appSettings.settings.serverAPI && this.selectedServer === 'random'))) return;
     // refresh is not enabled
@@ -193,11 +195,11 @@ export class ConfigureAppComponent implements OnInit {
       this.nodeUncemented = Number(blockCount.count - blockCount.cemented).toLocaleString('en-US');
     } catch {console.warn('Failed to get node stats: block count'); }
 
-    try {
-      const quorumData = await this.api.confirmationQuorum();
-      this.peersStakeReq = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_required)).toLocaleString('en-US') : null;
-      this.peersStakeTotal = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
-    } catch {console.warn('Failed to get node stats: confirmation quorum'); }
+    // try {
+    //   const quorumData = await this.api.confirmationQuorum();
+    //   this.peersStakeReq = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_required)).toLocaleString('en-US') : null;
+    //   this.peersStakeTotal = quorumData ? Number(this.util.flr.rawToMflr(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
+    // } catch {console.warn('Failed to get node stats: confirmation quorum'); }
 
     try {
       const version = await this.api.version();

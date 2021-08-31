@@ -403,12 +403,12 @@ export class RepresentativeService {
   // tslint:disable-next-line:member-ordering
   defaultRepresentatives = [
     {
-      id: 'flr_1tchxge6ydc9eshobya18n1crdx6ud3g4yjndpakarcjjgx5od3zicguhzf6',
+      id: 'flr_3fryposh98j7wa38tcghep8qwjwz11a4971xwfjqrie77oypmym6qejx7gjg',
       name: 'FlairrVault Rep',
       trusted: true,
     },
     {
-      id: 'flr_1kccfax3gmyng3qjnwtr38opy59f3xwti4crtzh5uc634qkknuzwh3yityzo',
+      id: 'flr_3tk6cw7ad9wmrgz7ue8nkpuwuofmqac8ie61yza79trduq595xnc9aipx5j5',
       name: 'Flairr Foundation #2',
       trusted: true,
     },

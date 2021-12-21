@@ -309,6 +309,8 @@ function getAccountPublicKey(account) {
   const isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop);
   if (!isValid) throw new Error(`Invalid FLAIRR account`);
 
+  console.log("getting account public key");
+  
   const key_uint4 = array_crop(uint5ToUint4(stringToUint5(account_crop.substring(0, 52))));
   const hash_uint4 = uint5ToUint4(stringToUint5(account_crop.substring(52, 60)));
   const key_array = uint4ToUint8(key_uint4);

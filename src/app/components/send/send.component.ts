@@ -208,10 +208,20 @@ export class SendComponent implements OnInit {
     this.fromAccount = from;
     this.toAccount = to;
 
+    console.log("fromAccount: ", this.fromAccount);
+    console.log("toAccount: ", this.toAccount);
+    
+
     const rawAmount = this.getAmountBaseValue(this.amount || 0);
+    console.log("rawAmount: ", rawAmount);
+    
     this.rawAmount = rawAmount.plus(this.amountRaw);
+    console.log("this.rawAmount: ", this.rawAmount);
+
 
     const flairrAmount = this.rawAmount.div(this.flr);
+    console.log("flairrAmount: ", flairrAmount);
+    
 
     if (this.amount < 0 || rawAmount.lessThan(0)) {
       return this.notificationService.sendWarning(`Amount is invalid`);
@@ -222,6 +232,9 @@ if (flairrAmount.lessThan(1)) return this.notificationService.sendWarning(`Trans
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
     this.amountRaw = this.rawAmount.mod(this.flr);
+
+    console.log("this.amountRaw: ", this.amountRaw);
+    
 
     // Determine fiat value of the amount
     this.amountFiat = this.util.flr.rawToMflr(rawAmount).times(this.price.price.lastPrice).toNumber();

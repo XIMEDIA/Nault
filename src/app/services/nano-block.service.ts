@@ -180,7 +180,9 @@ export class FlairrBlockService {
   // }
 
   async generateSend(walletAccount, toAccountID, rawAmount, ledger = false) {
-    console.log("params in gerneateSend: ", walletAccount, toAccountID, rawAmount);
+    console.log("params in gerneateSend: ", walletAccount, toAccountID);
+    console.log("rawAmount: ", rawAmount);
+    
     
     const fromAccount = await this.api.accountInfo(walletAccount.id);
     if (!fromAccount) throw new Error(`Unable to get account information for ${walletAccount.id}`);
@@ -228,6 +230,8 @@ export class FlairrBlockService {
         return;
       }
     } else {
+      console.log("calling to get sig for send");
+      
       this.validateAccount(fromAccount);
       this.signStateBlock(walletAccount, blockData);
     }
@@ -316,6 +320,8 @@ export class FlairrBlockService {
         return;
       }
     } else {
+      console.log("calling to get sig receive");
+
       this.validateAccount(toAcct);
       this.signStateBlock(walletAccount, blockData);
     }
@@ -447,7 +453,9 @@ export class FlairrBlockService {
     const hashBytes = this.util.flr.hashStateBlock(blockData);
     const privKey = walletAccount.keyPair.secretKey;
     const signed = nacl.sign.detached(hashBytes, privKey, walletAccount.keyPair.expanded);
+    
     blockData.signature = this.util.hex.fromUint8(signed);
+    console.log("adding blockData sig", blockData.signature);
   }
 
   sendLedgerDeniedNotification(err = null) {

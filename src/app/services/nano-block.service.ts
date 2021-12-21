@@ -180,11 +180,20 @@ export class FlairrBlockService {
   // }
 
   async generateSend(walletAccount, toAccountID, rawAmount, ledger = false) {
+    console.log("params in gerneateSend: ", walletAccount, toAccountID, rawAmount);
+    
     const fromAccount = await this.api.accountInfo(walletAccount.id);
     if (!fromAccount) throw new Error(`Unable to get account information for ${walletAccount.id}`);
 
+    console.log("fromAccount: ", fromAccount);
+    
     const remaining = new BigNumber(fromAccount.balance).minus(rawAmount);
+
+    console.log('remaining: ', remaining);
+    
     const remainingDecimal = remaining.toString(10);
+    console.log("remainingDecimal: ", remainingDecimal);
+    
 
     const representative = fromAccount.representative || (this.settings.settings.defaultRepresentative || this.getRandomRepresentative());
     const blockData = {
@@ -198,6 +207,8 @@ export class FlairrBlockService {
       signature: null,
     };
 
+    console.log("blockData 1: ", blockData);
+    
     if (ledger) {
       const ledgerBlock = {
         previousBlock: fromAccount.frontier,
@@ -226,8 +237,11 @@ export class FlairrBlockService {
     }
 
     blockData.work = await this.workPool.getWork(fromAccount.frontier);
+    console.log("blockData sent to process ", blockData);
 
     const processResponse = await this.api.process(blockData, TxType.send);
+    console.log("processResponse: ", processResponse);
+
     if (!processResponse || !processResponse.hash) throw new Error(processResponse.error || `Node returned an error`);
 
     walletAccount.frontier = processResponse.hash;
@@ -238,17 +252,29 @@ export class FlairrBlockService {
   }
 
   async generateReceive(walletAccount, sourceBlock, ledger = false) {
+    console.log("params in generateReceive: ", walletAccount, sourceBlock);
+
     const toAcct = await this.api.accountInfo(walletAccount.id);
     let workBlock = null;
 
     const openEquiv = !toAcct || !toAcct.frontier;
+    console.log("toAcct: ", toAcct);
+    console.log("openEquiv: ", openEquiv);
+    
+    
 
     const previousBlock = toAcct.frontier || this.zeroHash;
     const representative = toAcct.representative || (this.settings.settings.defaultRepresentative || this.getRandomRepresentative());
 
     const srcBlockInfo = await this.api.blocksInfo([sourceBlock]);
+    console.log("srcBlockInfo: ", srcBlockInfo);
+    
     const srcAmount = new BigNumber(srcBlockInfo.blocks[sourceBlock].amount);
+    console.log("srcAmount: ", srcAmount);
+    
     const newBalance = openEquiv ? srcAmount : new BigNumber(toAcct.balance).plus(srcAmount);
+    console.log("newBalance: ", newBalance);
+    
     const newBalanceDecimal = newBalance.toString(10);
     let newBalancePadded = newBalance.toString(16);
     while (newBalancePadded.length < 32) newBalancePadded = '0' + newBalancePadded; // Left pad with 0's
@@ -262,6 +288,8 @@ export class FlairrBlockService {
       signature: null,
       work: null
     };
+    console.log("blockData 1: ", blockData);
+    
 
     // We have everything we need, we need to obtain a signature
     if (ledger) {
@@ -297,8 +325,16 @@ export class FlairrBlockService {
       this.notifications.sendInfo(`Generating Proof of Work... This may take a minute or two`);
     }
 
+    
     blockData.work = await this.workPool.getWork(workBlock);
+
+    console.log("blockData sent to process for receive: ", blockData);
+    console.log("workBlock: ", workBlock);
+    
+
     const processResponse = await this.api.process(blockData, openEquiv ? TxType.open : TxType.receive);
+    console.log("processResponse: ", processResponse);
+    
     if (processResponse && processResponse.hash) {
       walletAccount.frontier = processResponse.hash;
       this.workPool.addWorkToCache(processResponse.hash); // Add new hash into the work pool
